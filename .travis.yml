@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+    - "12.14.1"
+
+branches:
+  only:
+    - angular6-json-schema-form
+
+before_script:
+  - yarn install --frozen-lockfile
+
+script:
+  - yarn buildlib
+  - yarn build
+  
