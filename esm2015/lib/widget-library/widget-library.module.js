@@ -1,0 +1,16 @@
+import { BASIC_WIDGETS } from './index';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { OrderableDirective } from './orderable.directive';
+export class WidgetLibraryModule {
+}
+WidgetLibraryModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, FormsModule, ReactiveFormsModule],
+                declarations: [...BASIC_WIDGETS, OrderableDirective],
+                exports: [...BASIC_WIDGETS, OrderableDirective],
+                entryComponents: [...BASIC_WIDGETS]
+            },] }
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2lkZ2V0LWxpYnJhcnkubW9kdWxlLmpzIiwic291cmNlUm9vdCI6Ii9ob21lL2RuaW1vbi9Eb2N1bWVudHMvZ2l0L2NvbnZlcGF5L2Fqc2YvcHJvamVjdHMvYWpzZi1jb3JlL3NyYy8iLCJzb3VyY2VzIjpbImxpYi93aWRnZXQtbGlicmFyeS93aWRnZXQtbGlicmFyeS5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLGFBQWEsRUFBRSxNQUFNLFNBQVMsQ0FBQztBQUN4QyxPQUFPLEVBQUUsWUFBWSxFQUFFLE1BQU0saUJBQWlCLENBQUM7QUFDL0MsT0FBTyxFQUFFLFdBQVcsRUFBRSxtQkFBbUIsRUFBRSxNQUFNLGdCQUFnQixDQUFDO0FBQ2xFLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFDekMsT0FBTyxFQUFFLGtCQUFrQixFQUFFLE1BQU0sdUJBQXVCLENBQUM7QUFRM0QsTUFBTSxPQUFPLG1CQUFtQjs7O1lBTi9CLFFBQVEsU0FBQztnQkFDUixPQUFPLEVBQUUsQ0FBQyxZQUFZLEVBQUUsV0FBVyxFQUFFLG1CQUFtQixDQUFDO2dCQUN6RCxZQUFZLEVBQUUsQ0FBQyxHQUFHLGFBQWEsRUFBRSxrQkFBa0IsQ0FBQztnQkFDcEQsT0FBTyxFQUFFLENBQUMsR0FBRyxhQUFhLEVBQUUsa0JBQWtCLENBQUM7Z0JBQy9DLGVBQWUsRUFBRSxDQUFDLEdBQUcsYUFBYSxDQUFDO2FBQ3BDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQkFTSUNfV0lER0VUUyB9IGZyb20gJy4vaW5kZXgnO1xuaW1wb3J0IHsgQ29tbW9uTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29tbW9uJztcbmltcG9ydCB7IEZvcm1zTW9kdWxlLCBSZWFjdGl2ZUZvcm1zTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvZm9ybXMnO1xuaW1wb3J0IHsgTmdNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IE9yZGVyYWJsZURpcmVjdGl2ZSB9IGZyb20gJy4vb3JkZXJhYmxlLmRpcmVjdGl2ZSc7XG5cbkBOZ01vZHVsZSh7XG4gIGltcG9ydHM6IFtDb21tb25Nb2R1bGUsIEZvcm1zTW9kdWxlLCBSZWFjdGl2ZUZvcm1zTW9kdWxlXSxcbiAgZGVjbGFyYXRpb25zOiBbLi4uQkFTSUNfV0lER0VUUywgT3JkZXJhYmxlRGlyZWN0aXZlXSxcbiAgZXhwb3J0czogWy4uLkJBU0lDX1dJREdFVFMsIE9yZGVyYWJsZURpcmVjdGl2ZV0sXG4gIGVudHJ5Q29tcG9uZW50czogWy4uLkJBU0lDX1dJREdFVFNdXG59KVxuZXhwb3J0IGNsYXNzIFdpZGdldExpYnJhcnlNb2R1bGUge1xufVxuIl19
