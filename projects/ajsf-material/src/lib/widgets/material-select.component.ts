@@ -1,5 +1,5 @@
 import { AbstractControl } from '@angular/forms';
-import {Component, Inject, Input, OnInit, Optional} from '@angular/core';
+import {Component, Inject, Input, OnInit, Optional, ChangeDetectorRef} from '@angular/core';
 import { JsonSchemaFormService, buildTitleMap, isArray } from '@ajsf/core';
 import { MAT_LABEL_GLOBAL_OPTIONS } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -94,14 +94,21 @@ export class MaterialSelectComponent implements OnInit {
   @Input() layoutNode: any;
   @Input() layoutIndex: number[];
   @Input() dataIndex: number[];
+  @Input() parent;
 
   constructor(
     @Inject(MAT_FORM_FIELD_DEFAULT_OPTIONS) @Optional() public matFormFieldDefaultOptions,
     @Inject(MAT_LABEL_GLOBAL_OPTIONS) @Optional() public matLabelGlobalOptions,
-    private jsf: JsonSchemaFormService
+    private jsf: JsonSchemaFormService,
+    public cdf: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
+    if(this.parent) {
+      this.parent.selectFrameworkWidgets.push(this);
+    } else {
+      console.warn('Missing parent for', this);
+    }
     this.options = this.layoutNode.options || {};
     this.selectList = buildTitleMap(
       this.options.titleMap || this.options.enumNames,

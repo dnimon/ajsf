@@ -20,6 +20,7 @@ import { JsonSchemaFormService } from '@ajsf/core';
       <select-framework-widget *ngIf="showWidget(layoutNode)"
         [dataIndex]="layoutNode?.arrayItem ? (dataIndex || []).concat(i) : (dataIndex || [])"
         [layoutIndex]="(layoutIndex || []).concat(i)"
+        [parent]="parent"
         [layoutNode]="layoutNode"></select-framework-widget>
     <div>`,
   changeDetection: ChangeDetectionStrategy.Default,
@@ -29,6 +30,7 @@ export class FlexLayoutRootComponent {
   @Input() layoutIndex: number[];
   @Input() layout: any[];
   @Input() isFlexItem = false;
+  @Input() parent;
 
   constructor(
     private jsf: JsonSchemaFormService

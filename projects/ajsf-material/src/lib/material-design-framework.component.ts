@@ -21,6 +21,7 @@ export class MaterialDesignFrameworkComponent implements OnInit, OnChanges {
   @Input() layoutNode: any;
   @Input() layoutIndex: number[];
   @Input() dataIndex: number[];
+  @Input() parent;
 
   constructor(
     private changeDetector: ChangeDetectorRef,

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChildren } from '@angular/core';
 import { JsonSchemaFormService } from '../json-schema-form.service';
 
 
@@ -21,6 +21,7 @@ import { JsonSchemaFormService } from '../json-schema-form.service';
         <select-framework-widget *ngIf="showWidget(layoutItem)"
           [dataIndex]="layoutItem?.arrayItem ? (dataIndex || []).concat(i) : (dataIndex || [])"
           [layoutIndex]="(layoutIndex || []).concat(i)"
+          [parent]="this"
           [layoutNode]="layoutItem"></select-framework-widget>
       </div>
     </div>`,
@@ -54,6 +55,7 @@ export class RootComponent {
   @Input() layout: any[];
   @Input() isOrderable: boolean;
   @Input() isFlexItem = false;
+  selectFrameworkWidgets = [];
 
   constructor(
     private jsf: JsonSchemaFormService

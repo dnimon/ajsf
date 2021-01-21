@@ -15,6 +15,7 @@ export class SelectFrameworkComponent implements OnChanges, OnInit {
   @Input() layoutNode: any;
   @Input() layoutIndex: number[];
   @Input() dataIndex: number[];
+  @Input() parent;
   @ViewChild('widgetContainer', {
       read: ViewContainerRef,
       static: true })
@@ -43,6 +44,7 @@ export class SelectFrameworkComponent implements OnChanges, OnInit {
       for (const input of ['layoutNode', 'layoutIndex', 'dataIndex']) {
         this.newComponent.instance[input] = this[input];
       }
+      this.newComponent.instance.parent = this.parent;
     }
   }
 }

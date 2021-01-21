@@ -11,6 +11,7 @@ import {
   OnInit,
   Output,
   SimpleChanges,
+  ViewChild
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { convertSchemaToDraft6 } from './shared/convert-schema-to-draft6.function';
@@ -140,6 +141,8 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
 
   onChange: Function;
   onTouched: Function;
+
+  @ViewChild('rootWidget') rootWidget;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
