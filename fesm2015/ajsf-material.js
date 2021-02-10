@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, Inject, Optional, ChangeDetectorRef, Injectable, NgModule } from '@angular/core';
-import { JsonSchemaFormService, hasOwn, buildTitleMap, dateToString, isDefined, isArray, Framework, WidgetLibraryModule, JsonSchemaFormModule, FrameworkLibraryService, WidgetLibraryService } from '@ajsf/core';
+import { JsonSchemaFormService, hasOwn, buildTitleMap, isDefined, isArray, Framework, WidgetLibraryModule, JsonSchemaFormModule, FrameworkLibraryService, WidgetLibraryService } from '@ajsf/core';
 import { MAT_LABEL_GLOBAL_OPTIONS, MatNativeDateModule } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
 import cloneDeep from 'lodash/cloneDeep';
@@ -707,6 +707,29 @@ MaterialChipListComponent.propDecorators = {
     dataIndex: [{ type: Input }]
 };
 
+const REGEX_PARSE = /^(\d{4})-?(\d{1,2})-?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d{1,3})?$/;
+function parseDate(date) {
+    if (!date) {
+        return null;
+    }
+    const d = date.match(REGEX_PARSE);
+    if (d) {
+        return new Date(Number(d[1]), Number(d[2]) - 1, Number(d[3]) || 1, Number(d[4]) || 0, Number(d[5]) || 0, Number(d[6]) || 0, Number(d[7]) || 0);
+    }
+    return null;
+}
+function getOrdinal(day) {
+    if (day > 3 && day < 21) {
+        return 'th';
+    }
+    switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+    }
+}
+
 class MaterialDatepickerComponent {
     constructor(matFormFieldDefaultOptions, matLabelGlobalOptions, jsf) {
         this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
@@ -720,7 +743,7 @@ class MaterialDatepickerComponent {
         this.options = this.layoutNode.options || {};
         this.jsf.initializeControl(this, !this.options.readonly);
         if (this.controlValue) {
-            this.formControl.setValue(dateToString(this.controlValue, this.options));
+            this.formControl.setValue(parseDate(this.controlValue));
         }
         if (!this.options.notitle && !this.options.description && this.options.placeholder) {
             this.options.description = this.options.placeholder;
@@ -728,9 +751,6 @@ class MaterialDatepickerComponent {
     }
     updateValue(event) {
         this.options.showErrors = true;
-        if (event.value) {
-            this.formControl.setValue(dateToString(event.value, this.options));
-        }
     }
 }
 MaterialDatepickerComponent.decorators = [
@@ -758,6 +778,7 @@ MaterialDatepickerComponent.decorators = [
         [name]="controlName"
         [placeholder]="options?.title"
         [readonly]="options?.readonly"
+        [value]="controlValue"
         [required]="options?.required"
         [style.width]="'100%'"
         (blur)="options.showErrors = true"

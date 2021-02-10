@@ -1,12 +1,12 @@
 import { OnInit } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { JsonSchemaFormService } from '@ajsf/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 export declare class MaterialDatepickerComponent implements OnInit {
     matFormFieldDefaultOptions: any;
     matLabelGlobalOptions: any;
     private jsf;
-    formControl: AbstractControl;
+    formControl: FormControl;
     controlName: string;
     controlValue: string;
     dateValue: any;

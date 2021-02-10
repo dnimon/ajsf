@@ -740,6 +740,29 @@
         dataIndex: [{ type: core.Input }]
     };
 
+    var REGEX_PARSE = /^(\d{4})-?(\d{1,2})-?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d{1,3})?$/;
+    function parseDate(date) {
+        if (!date) {
+            return null;
+        }
+        var d = date.match(REGEX_PARSE);
+        if (d) {
+            return new Date(Number(d[1]), Number(d[2]) - 1, Number(d[3]) || 1, Number(d[4]) || 0, Number(d[5]) || 0, Number(d[6]) || 0, Number(d[7]) || 0);
+        }
+        return null;
+    }
+    function getOrdinal(day) {
+        if (day > 3 && day < 21) {
+            return 'th';
+        }
+        switch (day % 10) {
+            case 1: return 'st';
+            case 2: return 'nd';
+            case 3: return 'rd';
+            default: return 'th';
+        }
+    }
+
     var MaterialDatepickerComponent = /** @class */ (function () {
         function MaterialDatepickerComponent(matFormFieldDefaultOptions, matLabelGlobalOptions, jsf) {
             this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
@@ -753,7 +776,7 @@
             this.options = this.layoutNode.options || {};
             this.jsf.initializeControl(this, !this.options.readonly);
             if (this.controlValue) {
-                this.formControl.setValue(core$1.dateToString(this.controlValue, this.options));
+                this.formControl.setValue(parseDate(this.controlValue));
             }
             if (!this.options.notitle && !this.options.description && this.options.placeholder) {
                 this.options.description = this.options.placeholder;
@@ -761,9 +784,6 @@
         };
         MaterialDatepickerComponent.prototype.updateValue = function (event) {
             this.options.showErrors = true;
-            if (event.value) {
-                this.formControl.setValue(core$1.dateToString(event.value, this.options));
-            }
         };
         return MaterialDatepickerComponent;
     }());
@@ -771,7 +791,7 @@
         { type: core.Component, args: [{
                     // tslint:disable-next-line:component-selector
                     selector: 'material-datepicker-widget',
-                    template: "\n    <mat-form-field [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n                    [class]=\"options?.htmlClass || ''\"\n                    [floatLabel]=\"options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')\"\n                    [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n                    [style.width]=\"'100%'\">\n      <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n        <input matInput *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [id]=\"'control' + layoutNode?._id\"\n        [max]=\"options?.maximum\"\n        [matDatepicker]=\"picker\"\n        [min]=\"options?.minimum\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.title\"\n        [readonly]=\"options?.readonly\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        (blur)=\"options.showErrors = true\"\n        (dateChange)=\"updateValue($event)\"\n        (dateInput)=\"updateValue($event)\">\n      <input matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [disabled]=\"controlDisabled || options?.readonly\"\n        [id]=\"'control' + layoutNode?._id\"\n        [max]=\"options?.maximum\"\n        [matDatepicker]=\"picker\"\n        [min]=\"options?.minimum\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [readonly]=\"options?.readonly\"\n        (blur)=\"options.showErrors = true\"\n        (dateChange)=\"updateValue($event)\"\n        (dateInput)=\"updateValue($event)\">\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n      <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n    </mat-form-field>\n    <mat-datepicker #picker ></mat-datepicker>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                    template: "\n    <mat-form-field [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n                    [class]=\"options?.htmlClass || ''\"\n                    [floatLabel]=\"options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')\"\n                    [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n                    [style.width]=\"'100%'\">\n      <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n        <input matInput *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [id]=\"'control' + layoutNode?._id\"\n        [max]=\"options?.maximum\"\n        [matDatepicker]=\"picker\"\n        [min]=\"options?.minimum\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.title\"\n        [readonly]=\"options?.readonly\"\n        [value]=\"controlValue\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        (blur)=\"options.showErrors = true\"\n        (dateChange)=\"updateValue($event)\"\n        (dateInput)=\"updateValue($event)\">\n      <input matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [disabled]=\"controlDisabled || options?.readonly\"\n        [id]=\"'control' + layoutNode?._id\"\n        [max]=\"options?.maximum\"\n        [matDatepicker]=\"picker\"\n        [min]=\"options?.minimum\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [readonly]=\"options?.readonly\"\n        (blur)=\"options.showErrors = true\"\n        (dateChange)=\"updateValue($event)\"\n        (dateInput)=\"updateValue($event)\">\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n      <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n    </mat-form-field>\n    <mat-datepicker #picker ></mat-datepicker>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
                     styles: ["\n    mat-error { font-size: 75%; margin-top: -1rem; margin-bottom: 0.5rem; }\n    ::ng-deep json-schema-form mat-form-field .mat-form-field-wrapper .mat-form-field-flex\n      .mat-form-field-infix { width: initial; }\n  "]
                 },] }
     ];
