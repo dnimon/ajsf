@@ -33,6 +33,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MaterialDesignFramework} from './material-design.framework';
 import {MATERIAL_FRAMEWORK_COMPONENTS} from './widgets/public_api';
 import {fixAngularFlex} from './angular-flex-monkey-patch';
+import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import {MomentUtcDateAdapter} from './widgets/mat-utc-date-adapter'
+import { DateAdapter } from '@angular/material/core';
 
 /**
  * unused @angular/material modules:
@@ -59,6 +62,7 @@ export const ANGULAR_MATERIAL_MODULES = [
     ...ANGULAR_MATERIAL_MODULES,
     WidgetLibraryModule,
     JsonSchemaFormModule,
+    MatMomentDateModule,
   ],
   declarations: [
     ...MATERIAL_FRAMEWORK_COMPONENTS,
@@ -72,6 +76,7 @@ export const ANGULAR_MATERIAL_MODULES = [
     FrameworkLibraryService,
     WidgetLibraryService,
     {provide: Framework, useClass: MaterialDesignFramework, multi: true},
+    { provide: DateAdapter, useClass: MomentUtcDateAdapter }
   ],
   entryComponents: [
     ...MATERIAL_FRAMEWORK_COMPONENTS,

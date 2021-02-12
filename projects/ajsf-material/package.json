@@ -40,13 +40,15 @@
   },
   "private": false,
   "dependencies": {
-    "lodash-es": "^4.17.15",
     "@ajsf/core": "~0.3.0-beta.4",
+    "lodash-es": "^4.17.15",
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
     "@angular/flex-layout": ">=9.0.0-beta.28",
     "@angular/material": ">=9.0.0",
-    "@angular/cdk": ">=9.0.0"
+    "@angular/cdk": ">=9.0.0",
+    "@angular/material-moment-adapter": "^11.2.0",
+    "moment": "^2.29.1"
   }
 }

@@ -1,10 +1,11 @@
 import { Component, Inject, Input, OnInit, Optional } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { JsonSchemaFormService } from '@ajsf/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MAT_LABEL_GLOBAL_OPTIONS } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { parseDate } from './date.functions';
+import * as moment from 'moment';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -19,7 +20,6 @@ import { parseDate } from './date.functions';
       <span matPrefix *ngIf="options?.prefix || options?.fieldAddonLeft"
         [innerHTML]="options?.prefix || options?.fieldAddonLeft"></span>
         <input matInput *ngIf="boundControl"
-        [formControl]="formControl"
         [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
         [attr.list]="'control' + layoutNode?._id + 'Autocomplete'"
         [attr.readonly]="options?.readonly ? 'readonly' : null"
@@ -29,12 +29,14 @@ import { parseDate } from './date.functions';
         [min]="options?.minimum"
         [name]="controlName"
         [placeholder]="options?.title"
-        [readonly]="options?.readonly"
+        [readonly]="true"
         [required]="options?.required"
+        [value]="dateValueStr"
         [style.width]="'100%'"
         (blur)="options.showErrors = true"
         (dateChange)="updateValue($event)"
-        (dateInput)="updateValue($event)">
+        (dateInput)="updateValue($event)"
+        [style.cursor]="'default'">
       <input matInput *ngIf="!boundControl"
         [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
         [attr.list]="'control' + layoutNode?._id + 'Autocomplete'"
@@ -49,7 +51,6 @@ import { parseDate } from './date.functions';
         [required]="options?.required"
         [style.width]="'100%'"
         [readonly]="options?.readonly"
-        [value]="controlValue"
         (blur)="options.showErrors = true"
         (dateChange)="updateValue($event)"
         (dateInput)="updateValue($event)">
@@ -69,13 +70,15 @@ import { parseDate } from './date.functions';
   `],
 })
 export class MaterialDatepickerComponent implements OnInit {
-  formControl: FormControl;
+  formControl: AbstractControl;
   controlName: string;
   controlValue: string;
   dateValue: any;
   controlDisabled = false;
   boundControl = false;
   options: any;
+  dateStr;
+  dateValueStr;
   autoCompleteList: string[] = [];
   @Input() layoutNode: any;
   @Input() layoutIndex: number[];
@@ -91,7 +94,8 @@ export class MaterialDatepickerComponent implements OnInit {
     this.options = this.layoutNode.options || {};
     this.jsf.initializeControl(this, !this.options.readonly);
     if (this.controlValue) {
-      this.formControl.setValue(parseDate(this.controlValue));
+      this.formControl.setValue(moment(this.controlValue).toISOString());
+      this.dateValueStr = moment.utc(this.controlValue);
     }
     if (!this.options.notitle && !this.options.description && this.options.placeholder) {
       this.options.description = this.options.placeholder;
@@ -99,6 +103,8 @@ export class MaterialDatepickerComponent implements OnInit {
   }
 
   updateValue(event: MatDatepickerInputEvent<Date>) {
+    this.formControl.setValue(event.value.toISOString());
     this.options.showErrors = true;
+    this.dateValueStr = moment.utc(this.controlValue);
   }
 }
