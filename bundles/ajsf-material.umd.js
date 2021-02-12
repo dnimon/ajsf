@@ -1,11 +1,33 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ajsf/core'), require('@angular/material/core'), require('@angular/material/form-field'), require('lodash/cloneDeep'), require('@angular/common'), require('@angular/forms'), require('@angular/flex-layout'), require('@angular/material/autocomplete'), require('@angular/material/button'), require('@angular/material/button-toggle'), require('@angular/material/card'), require('@angular/material/checkbox'), require('@angular/material/chips'), require('@angular/material/datepicker'), require('@angular/material/expansion'), require('@angular/material/icon'), require('@angular/material/input'), require('@angular/material/radio'), require('@angular/material/select'), require('@angular/material/slide-toggle'), require('@angular/material/slider'), require('@angular/material/stepper'), require('@angular/material/tabs'), require('@angular/material/tooltip'), require('@angular/material/menu'), require('@angular/material/toolbar'), require('@angular/flex-layout/core')) :
-    typeof define === 'function' && define.amd ? define('@ajsf/material', ['exports', '@angular/core', '@ajsf/core', '@angular/material/core', '@angular/material/form-field', 'lodash/cloneDeep', '@angular/common', '@angular/forms', '@angular/flex-layout', '@angular/material/autocomplete', '@angular/material/button', '@angular/material/button-toggle', '@angular/material/card', '@angular/material/checkbox', '@angular/material/chips', '@angular/material/datepicker', '@angular/material/expansion', '@angular/material/icon', '@angular/material/input', '@angular/material/radio', '@angular/material/select', '@angular/material/slide-toggle', '@angular/material/slider', '@angular/material/stepper', '@angular/material/tabs', '@angular/material/tooltip', '@angular/material/menu', '@angular/material/toolbar', '@angular/flex-layout/core'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ajsf = global.ajsf || {}, global.ajsf.material = {}), global.ng.core, global['@ajsf/core'], global.ng.material.core, global.ng.material.formField, global['lodash-es'], global.ng.common, global.ng.forms, global.ng.flexLayout, global.ng.material.autocomplete, global.ng.material.button, global.ng.material.buttonToggle, global.ng.material.card, global.ng.material.checkbox, global.ng.material.chips, global.ng.material.datepicker, global.ng.material.expansion, global.ng.material.icon, global.ng.material.input, global.ng.material.radio, global.ng.material.select, global.ng.material.slideToggle, global.ng.material.slider, global.ng.material.stepper, global.ng.material.tabs, global.ng.material.tooltip, global.ng.material.menu, global.ng.material.toolbar, global.ng.flexLayout.core));
-}(this, (function (exports, core, core$1, core$2, formField, cloneDeep, common, forms, flexLayout, autocomplete, button, buttonToggle, card, checkbox, chips, datepicker, expansion, icon, input, radio, select, slideToggle, slider, stepper, tabs, tooltip, menu, toolbar, core$3) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ajsf/core'), require('@angular/material/core'), require('@angular/material/form-field'), require('moment'), require('lodash/cloneDeep'), require('@angular/common'), require('@angular/forms'), require('@angular/flex-layout'), require('@angular/material/autocomplete'), require('@angular/material/button'), require('@angular/material/button-toggle'), require('@angular/material/card'), require('@angular/material/checkbox'), require('@angular/material/chips'), require('@angular/material/datepicker'), require('@angular/material/expansion'), require('@angular/material/icon'), require('@angular/material/input'), require('@angular/material/radio'), require('@angular/material/select'), require('@angular/material/slide-toggle'), require('@angular/material/slider'), require('@angular/material/stepper'), require('@angular/material/tabs'), require('@angular/material/tooltip'), require('@angular/material/menu'), require('@angular/material/toolbar'), require('@angular/flex-layout/core'), require('@angular/material-moment-adapter')) :
+    typeof define === 'function' && define.amd ? define('@ajsf/material', ['exports', '@angular/core', '@ajsf/core', '@angular/material/core', '@angular/material/form-field', 'moment', 'lodash/cloneDeep', '@angular/common', '@angular/forms', '@angular/flex-layout', '@angular/material/autocomplete', '@angular/material/button', '@angular/material/button-toggle', '@angular/material/card', '@angular/material/checkbox', '@angular/material/chips', '@angular/material/datepicker', '@angular/material/expansion', '@angular/material/icon', '@angular/material/input', '@angular/material/radio', '@angular/material/select', '@angular/material/slide-toggle', '@angular/material/slider', '@angular/material/stepper', '@angular/material/tabs', '@angular/material/tooltip', '@angular/material/menu', '@angular/material/toolbar', '@angular/flex-layout/core', '@angular/material-moment-adapter'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ajsf = global.ajsf || {}, global.ajsf.material = {}), global.ng.core, global['@ajsf/core'], global.ng.material.core, global.ng.material.formField, global.moment, global['lodash-es'], global.ng.common, global.ng.forms, global.ng.flexLayout, global.ng.material.autocomplete, global.ng.material.button, global.ng.material.buttonToggle, global.ng.material.card, global.ng.material.checkbox, global.ng.material.chips, global.ng.material.datepicker, global.ng.material.expansion, global.ng.material.icon, global.ng.material.input, global.ng.material.radio, global.ng.material.select, global.ng.material.slideToggle, global.ng.material.slider, global.ng.material.stepper, global.ng.material.tabs, global.ng.material.tooltip, global.ng.material.menu, global.ng.material.toolbar, global.ng.flexLayout.core, global.ng.materialMomentAdapter));
+}(this, (function (exports, core, core$1, core$2, formField, moment, cloneDeep, common, forms, flexLayout, autocomplete, button, buttonToggle, card, checkbox, chips, datepicker, expansion, icon, input, radio, select, slideToggle, slider, stepper, tabs, tooltip, menu, toolbar, core$3, materialMomentAdapter) { 'use strict';
 
     function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
+    function _interopNamespace(e) {
+        if (e && e.__esModule) { return e; } else {
+            var n = Object.create(null);
+            if (e) {
+                Object.keys(e).forEach(function (k) {
+                    if (k !== 'default') {
+                        var d = Object.getOwnPropertyDescriptor(e, k);
+                        Object.defineProperty(n, k, d.get ? d : {
+                            enumerable: true,
+                            get: function () {
+                                return e[k];
+                            }
+                        });
+                    }
+                });
+            }
+            n['default'] = e;
+            return Object.freeze(n);
+        }
+    }
+
+    var moment__namespace = /*#__PURE__*/_interopNamespace(moment);
     var cloneDeep__default = /*#__PURE__*/_interopDefaultLegacy(cloneDeep);
 
     /*! *****************************************************************************
@@ -740,29 +762,6 @@
         dataIndex: [{ type: core.Input }]
     };
 
-    var REGEX_PARSE = /^(\d{4})-?(\d{1,2})-?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d{1,3})?$/;
-    function parseDate(date) {
-        if (!date) {
-            return null;
-        }
-        var d = date.match(REGEX_PARSE);
-        if (d) {
-            return new Date(Number(d[1]), Number(d[2]) - 1, Number(d[3]) || 1, Number(d[4]) || 0, Number(d[5]) || 0, Number(d[6]) || 0, Number(d[7]) || 0);
-        }
-        return null;
-    }
-    function getOrdinal(day) {
-        if (day > 3 && day < 21) {
-            return 'th';
-        }
-        switch (day % 10) {
-            case 1: return 'st';
-            case 2: return 'nd';
-            case 3: return 'rd';
-            default: return 'th';
-        }
-    }
-
     var MaterialDatepickerComponent = /** @class */ (function () {
         function MaterialDatepickerComponent(matFormFieldDefaultOptions, matLabelGlobalOptions, jsf) {
             this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
@@ -776,14 +775,17 @@
             this.options = this.layoutNode.options || {};
             this.jsf.initializeControl(this, !this.options.readonly);
             if (this.controlValue) {
-                this.formControl.setValue(parseDate(this.controlValue));
+                this.formControl.setValue(moment__namespace(this.controlValue).toISOString());
+                this.dateValueStr = moment.utc(this.controlValue);
             }
             if (!this.options.notitle && !this.options.description && this.options.placeholder) {
                 this.options.description = this.options.placeholder;
             }
         };
         MaterialDatepickerComponent.prototype.updateValue = function (event) {
+            this.formControl.setValue(event.value.toISOString());
             this.options.showErrors = true;
+            this.dateValueStr = moment.utc(this.controlValue);
         };
         return MaterialDatepickerComponent;
     }());
@@ -791,7 +793,7 @@
         { type: core.Component, args: [{
                     // tslint:disable-next-line:component-selector
                     selector: 'material-datepicker-widget',
-                    template: "\n    <mat-form-field [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n                    [class]=\"options?.htmlClass || ''\"\n                    [floatLabel]=\"options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')\"\n                    [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n                    [style.width]=\"'100%'\">\n      <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n        <input matInput *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [id]=\"'control' + layoutNode?._id\"\n        [max]=\"options?.maximum\"\n        [matDatepicker]=\"picker\"\n        [min]=\"options?.minimum\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.title\"\n        [readonly]=\"options?.readonly\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        (blur)=\"options.showErrors = true\"\n        (dateChange)=\"updateValue($event)\"\n        (dateInput)=\"updateValue($event)\">\n      <input matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [disabled]=\"controlDisabled || options?.readonly\"\n        [id]=\"'control' + layoutNode?._id\"\n        [max]=\"options?.maximum\"\n        [matDatepicker]=\"picker\"\n        [min]=\"options?.minimum\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [readonly]=\"options?.readonly\"\n        [value]=\"controlValue\"\n        (blur)=\"options.showErrors = true\"\n        (dateChange)=\"updateValue($event)\"\n        (dateInput)=\"updateValue($event)\">\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n      <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n    </mat-form-field>\n    <mat-datepicker #picker ></mat-datepicker>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                    template: "\n    <mat-form-field [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n                    [class]=\"options?.htmlClass || ''\"\n                    [floatLabel]=\"options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')\"\n                    [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n                    [style.width]=\"'100%'\">\n      <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n        <input matInput *ngIf=\"boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [id]=\"'control' + layoutNode?._id\"\n        [max]=\"options?.maximum\"\n        [matDatepicker]=\"picker\"\n        [min]=\"options?.minimum\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.title\"\n        [readonly]=\"true\"\n        [required]=\"options?.required\"\n        [value]=\"dateValueStr\"\n        [style.width]=\"'100%'\"\n        (blur)=\"options.showErrors = true\"\n        (dateChange)=\"updateValue($event)\"\n        (dateInput)=\"updateValue($event)\"\n        [style.cursor]=\"'default'\">\n      <input matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [disabled]=\"controlDisabled || options?.readonly\"\n        [id]=\"'control' + layoutNode?._id\"\n        [max]=\"options?.maximum\"\n        [matDatepicker]=\"picker\"\n        [min]=\"options?.minimum\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [readonly]=\"options?.readonly\"\n        (blur)=\"options.showErrors = true\"\n        (dateChange)=\"updateValue($event)\"\n        (dateInput)=\"updateValue($event)\">\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n      <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n    </mat-form-field>\n    <mat-datepicker #picker ></mat-datepicker>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
                     styles: ["\n    mat-error { font-size: 75%; margin-top: -1rem; margin-bottom: 0.5rem; }\n    ::ng-deep json-schema-form mat-form-field .mat-form-field-wrapper .mat-form-field-flex\n      .mat-form-field-infix { width: initial; }\n  "]
                 },] }
     ];
@@ -1386,6 +1388,36 @@
         };
     }
 
+    var MomentUtcDateAdapter = /** @class */ (function (_super) {
+        __extends(MomentUtcDateAdapter, _super);
+        function MomentUtcDateAdapter(dateLocale) {
+            return _super.call(this, dateLocale) || this;
+        }
+        MomentUtcDateAdapter.prototype.createDate = function (year, month, date) {
+            // Moment.js will create an invalid date if any of the components are out of bounds, but we
+            // explicitly check each case so we can throw more descriptive errors.
+            if (month < 0 || month > 11) {
+                throw Error("Invalid month index \"" + month + "\". Month index has to be between 0 and 11.");
+            }
+            if (date < 1) {
+                throw Error("Invalid date \"" + date + "\". Date has to be greater than 0.");
+            }
+            var result = moment.utc({ year: year, month: month, date: date }).locale(this.locale);
+            // If the result isn't valid, the date must have been out of bounds for this month.
+            if (!result.isValid()) {
+                throw Error("Invalid date \"" + date + "\" for month with index \"" + month + "\".");
+            }
+            return result;
+        };
+        return MomentUtcDateAdapter;
+    }(materialMomentAdapter.MomentDateAdapter));
+    MomentUtcDateAdapter.decorators = [
+        { type: core.Injectable }
+    ];
+    MomentUtcDateAdapter.ctorParameters = function () { return [
+        { type: String, decorators: [{ type: core.Optional }, { type: core.Inject, args: [core$2.MAT_DATE_LOCALE,] }] }
+    ]; };
+
     /**
      * unused @angular/material modules:
      * MatDialogModule, MatGridListModule, MatListModule, MatMenuModule,
@@ -1417,6 +1449,7 @@
                     ], ANGULAR_MATERIAL_MODULES, [
                         core$1.WidgetLibraryModule,
                         core$1.JsonSchemaFormModule,
+                        materialMomentAdapter.MatMomentDateModule,
                     ]),
                     declarations: __spread(MATERIAL_FRAMEWORK_COMPONENTS),
                     exports: __spread([
@@ -1427,6 +1460,7 @@
                         core$1.FrameworkLibraryService,
                         core$1.WidgetLibraryService,
                         { provide: core$1.Framework, useClass: MaterialDesignFramework, multi: true },
+                        { provide: core$2.DateAdapter, useClass: MomentUtcDateAdapter }
                     ],
                     entryComponents: __spread(MATERIAL_FRAMEWORK_COMPONENTS)
                 },] }
@@ -1465,6 +1499,7 @@
     exports.MaterialStepperComponent = MaterialStepperComponent;
     exports.MaterialTabsComponent = MaterialTabsComponent;
     exports.MaterialTextareaComponent = MaterialTextareaComponent;
+    exports.ɵa = MomentUtcDateAdapter;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

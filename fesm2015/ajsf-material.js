@@ -1,7 +1,9 @@
 import { Component, ChangeDetectionStrategy, Input, Inject, Optional, ChangeDetectorRef, Injectable, NgModule } from '@angular/core';
 import { JsonSchemaFormService, hasOwn, buildTitleMap, isDefined, isArray, Framework, WidgetLibraryModule, JsonSchemaFormModule, FrameworkLibraryService, WidgetLibraryService } from '@ajsf/core';
-import { MAT_LABEL_GLOBAL_OPTIONS, MatNativeDateModule } from '@angular/material/core';
+import { MAT_LABEL_GLOBAL_OPTIONS, MAT_DATE_LOCALE, MatNativeDateModule, DateAdapter } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
+import * as moment from 'moment';
+import { utc } from 'moment';
 import cloneDeep from 'lodash/cloneDeep';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,6 +28,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MediaMarshaller } from '@angular/flex-layout/core';
+import { MomentDateAdapter, MatMomentDateModule } from '@angular/material-moment-adapter';
 
 class FlexLayoutRootComponent {
     constructor(jsf) {
@@ -707,29 +710,6 @@ MaterialChipListComponent.propDecorators = {
     dataIndex: [{ type: Input }]
 };
 
-const REGEX_PARSE = /^(\d{4})-?(\d{1,2})-?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d{1,3})?$/;
-function parseDate(date) {
-    if (!date) {
-        return null;
-    }
-    const d = date.match(REGEX_PARSE);
-    if (d) {
-        return new Date(Number(d[1]), Number(d[2]) - 1, Number(d[3]) || 1, Number(d[4]) || 0, Number(d[5]) || 0, Number(d[6]) || 0, Number(d[7]) || 0);
-    }
-    return null;
-}
-function getOrdinal(day) {
-    if (day > 3 && day < 21) {
-        return 'th';
-    }
-    switch (day % 10) {
-        case 1: return 'st';
-        case 2: return 'nd';
-        case 3: return 'rd';
-        default: return 'th';
-    }
-}
-
 class MaterialDatepickerComponent {
     constructor(matFormFieldDefaultOptions, matLabelGlobalOptions, jsf) {
         this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
@@ -743,14 +723,17 @@ class MaterialDatepickerComponent {
         this.options = this.layoutNode.options || {};
         this.jsf.initializeControl(this, !this.options.readonly);
         if (this.controlValue) {
-            this.formControl.setValue(parseDate(this.controlValue));
+            this.formControl.setValue(moment(this.controlValue).toISOString());
+            this.dateValueStr = utc(this.controlValue);
         }
         if (!this.options.notitle && !this.options.description && this.options.placeholder) {
             this.options.description = this.options.placeholder;
         }
     }
     updateValue(event) {
+        this.formControl.setValue(event.value.toISOString());
         this.options.showErrors = true;
+        this.dateValueStr = utc(this.controlValue);
     }
 }
 MaterialDatepickerComponent.decorators = [
@@ -767,7 +750,6 @@ MaterialDatepickerComponent.decorators = [
       <span matPrefix *ngIf="options?.prefix || options?.fieldAddonLeft"
         [innerHTML]="options?.prefix || options?.fieldAddonLeft"></span>
         <input matInput *ngIf="boundControl"
-        [formControl]="formControl"
         [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
         [attr.list]="'control' + layoutNode?._id + 'Autocomplete'"
         [attr.readonly]="options?.readonly ? 'readonly' : null"
@@ -777,12 +759,14 @@ MaterialDatepickerComponent.decorators = [
         [min]="options?.minimum"
         [name]="controlName"
         [placeholder]="options?.title"
-        [readonly]="options?.readonly"
+        [readonly]="true"
         [required]="options?.required"
+        [value]="dateValueStr"
         [style.width]="'100%'"
         (blur)="options.showErrors = true"
         (dateChange)="updateValue($event)"
-        (dateInput)="updateValue($event)">
+        (dateInput)="updateValue($event)"
+        [style.cursor]="'default'">
       <input matInput *ngIf="!boundControl"
         [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
         [attr.list]="'control' + layoutNode?._id + 'Autocomplete'"
@@ -797,7 +781,6 @@ MaterialDatepickerComponent.decorators = [
         [required]="options?.required"
         [style.width]="'100%'"
         [readonly]="options?.readonly"
-        [value]="controlValue"
         (blur)="options.showErrors = true"
         (dateChange)="updateValue($event)"
         (dateInput)="updateValue($event)">
@@ -1701,6 +1684,34 @@ function fixAngularFlex() {
     };
 }
 
+class MomentUtcDateAdapter extends MomentDateAdapter {
+    constructor(dateLocale) {
+        super(dateLocale);
+    }
+    createDate(year, month, date) {
+        // Moment.js will create an invalid date if any of the components are out of bounds, but we
+        // explicitly check each case so we can throw more descriptive errors.
+        if (month < 0 || month > 11) {
+            throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
+        }
+        if (date < 1) {
+            throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
+        }
+        let result = utc({ year, month, date }).locale(this.locale);
+        // If the result isn't valid, the date must have been out of bounds for this month.
+        if (!result.isValid()) {
+            throw Error(`Invalid date "${date}" for month with index "${month}".`);
+        }
+        return result;
+    }
+}
+MomentUtcDateAdapter.decorators = [
+    { type: Injectable }
+];
+MomentUtcDateAdapter.ctorParameters = () => [
+    { type: String, decorators: [{ type: Optional }, { type: Inject, args: [MAT_DATE_LOCALE,] }] }
+];
+
 /**
  * unused @angular/material modules:
  * MatDialogModule, MatGridListModule, MatListModule, MatMenuModule,
@@ -1731,6 +1742,7 @@ MaterialDesignFrameworkModule.decorators = [
                     ...ANGULAR_MATERIAL_MODULES,
                     WidgetLibraryModule,
                     JsonSchemaFormModule,
+                    MatMomentDateModule,
                 ],
                 declarations: [
                     ...MATERIAL_FRAMEWORK_COMPONENTS,
@@ -1744,6 +1756,7 @@ MaterialDesignFrameworkModule.decorators = [
                     FrameworkLibraryService,
                     WidgetLibraryService,
                     { provide: Framework, useClass: MaterialDesignFramework, multi: true },
+                    { provide: DateAdapter, useClass: MomentUtcDateAdapter }
                 ],
                 entryComponents: [
                     ...MATERIAL_FRAMEWORK_COMPONENTS,
@@ -1760,5 +1773,5 @@ MaterialDesignFrameworkModule.ctorParameters = () => [];
  * Generated bundle index. Do not edit.
  */
 
-export { ANGULAR_MATERIAL_MODULES, FlexLayoutRootComponent, FlexLayoutSectionComponent, MATERIAL_FRAMEWORK_COMPONENTS, MaterialAddReferenceComponent, MaterialButtonComponent, MaterialButtonGroupComponent, MaterialCheckboxComponent, MaterialCheckboxesComponent, MaterialChipListComponent, MaterialDatepickerComponent, MaterialDesignFramework, MaterialDesignFrameworkComponent, MaterialDesignFrameworkModule, MaterialFileComponent, MaterialInputComponent, MaterialNumberComponent, MaterialOneOfComponent, MaterialRadiosComponent, MaterialSelectComponent, MaterialSliderComponent, MaterialStepperComponent, MaterialTabsComponent, MaterialTextareaComponent };
+export { ANGULAR_MATERIAL_MODULES, FlexLayoutRootComponent, FlexLayoutSectionComponent, MATERIAL_FRAMEWORK_COMPONENTS, MaterialAddReferenceComponent, MaterialButtonComponent, MaterialButtonGroupComponent, MaterialCheckboxComponent, MaterialCheckboxesComponent, MaterialChipListComponent, MaterialDatepickerComponent, MaterialDesignFramework, MaterialDesignFrameworkComponent, MaterialDesignFrameworkModule, MaterialFileComponent, MaterialInputComponent, MaterialNumberComponent, MaterialOneOfComponent, MaterialRadiosComponent, MaterialSelectComponent, MaterialSliderComponent, MaterialStepperComponent, MaterialTabsComponent, MaterialTextareaComponent, MomentUtcDateAdapter as ɵa };
 //# sourceMappingURL=ajsf-material.js.map
