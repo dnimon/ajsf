@@ -36,6 +36,7 @@ import {fixAngularFlex} from './angular-flex-monkey-patch';
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import {MomentUtcDateAdapter} from './widgets/mat-utc-date-adapter'
 import { DateAdapter } from '@angular/material/core';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 /**
  * unused @angular/material modules:
@@ -63,6 +64,7 @@ export const ANGULAR_MATERIAL_MODULES = [
     WidgetLibraryModule,
     JsonSchemaFormModule,
     MatMomentDateModule,
+    MaterialFileInputModule,
   ],
   declarations: [
     ...MATERIAL_FRAMEWORK_COMPONENTS,
