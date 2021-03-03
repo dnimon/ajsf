@@ -49,7 +49,8 @@
     "@angular/material": ">=9.0.0",
     "@angular/cdk": ">=9.0.0",
     "@angular/material-moment-adapter": "^11.2.0",
-    "moment": "^2.29.1"
+    "moment": "^2.29.1",
+    "ngx-material-file-input": "^2.1.1"
   },
   "main": "bundles/ajsf-material.umd.js",
   "module": "fesm2015/ajsf-material.js",

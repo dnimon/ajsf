@@ -1,10 +1,11 @@
-import { Component, ChangeDetectionStrategy, Input, Inject, Optional, ChangeDetectorRef, Injectable, NgModule } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Inject, Optional, ChangeDetectorRef, ViewChild, Injectable, NgModule } from '@angular/core';
 import { JsonSchemaFormService, hasOwn, buildTitleMap, isDefined, isArray, Framework, WidgetLibraryModule, JsonSchemaFormModule, FrameworkLibraryService, WidgetLibraryService } from '@ajsf/core';
 import { MAT_LABEL_GLOBAL_OPTIONS, MAT_DATE_LOCALE, MatNativeDateModule, DateAdapter } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
 import * as moment from 'moment';
 import { utc } from 'moment';
 import cloneDeep from 'lodash/cloneDeep';
+import { __awaiter } from 'tslib';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -29,6 +30,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MediaMarshaller } from '@angular/flex-layout/core';
 import { MomentDateAdapter, MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 class FlexLayoutRootComponent {
     constructor(jsf) {
@@ -910,10 +912,18 @@ MaterialDesignFrameworkComponent.propDecorators = {
     parent: [{ type: Input }]
 };
 
-// TODO: Add this control
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+const ɵ0 = toBase64;
 class MaterialFileComponent {
-    constructor(jsf) {
+    constructor(jsf, matFormFieldDefaultOptions, matLabelGlobalOptions) {
         this.jsf = jsf;
+        this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
+        this.matLabelGlobalOptions = matLabelGlobalOptions;
         this.controlDisabled = false;
         this.boundControl = false;
     }
@@ -922,23 +932,62 @@ class MaterialFileComponent {
         this.jsf.initializeControl(this);
     }
     updateValue(event) {
-        this.jsf.updateValue(this, event.target.value);
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("!!!", event.target.files);
+            if (event.target && event.target.files && event.target.files.length) {
+                const base64String = yield toBase64(event.target.files[0]);
+                console.log(base64String);
+                this.formControl.setValue(base64String);
+            }
+            else {
+                this.formControl.setValue(null);
+            }
+        });
     }
 }
 MaterialFileComponent.decorators = [
     { type: Component, args: [{
                 // tslint:disable-next-line:component-selector
                 selector: 'material-file-widget',
-                template: ``
+                template: `<mat-form-field [appearance]="options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'"
+                    [class]="options?.htmlClass || ''"
+                    [floatLabel]="options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')"
+                    [hideRequiredMarker]="options?.hideRequired ? 'true' : 'false'"
+                    [style.width]="'100%'">
+      <mat-label *ngIf="!options?.notitle">{{options?.title}}</mat-label>
+      <span matPrefix *ngIf="options?.prefix || options?.fieldAddonLeft"
+        [innerHTML]="options?.prefix || options?.fieldAddonLeft"></span>
+      <ngx-mat-file-input #fileInput (change)="updateValue($event);options.showErrors = true" [required]="options?.required" (blur)="options.showErrors = true"
+        >
+      </ngx-mat-file-input>
+      <button mat-icon-button matSuffix *ngIf="!fileInput.empty" (click)="fileInput.clear($event);updateValue($event)" style='cursor:pointer;'>
+        <mat-icon>clear</mat-icon>
+      </button>
+      <mat-icon matSuffix *ngIf="fileInput.empty" style='cursor:pointer'>folder</mat-icon>
+      <span matSuffix *ngIf="options?.suffix || options?.fieldAddonRight"
+        [innerHTML]="options?.suffix || options?.fieldAddonRight"></span>
+      <mat-hint *ngIf="options?.description && (!options?.showErrors || !options?.errorMessage)"
+        align="end" [innerHTML]="options?.description"></mat-hint>
+    </mat-form-field>
+    <mat-error *ngIf="options?.showErrors && options?.errorMessage"
+      [innerHTML]="options?.errorMessage"></mat-error>`,
+                styles: [`
+    mat-error { font-size: 75%; margin-top: -1rem; margin-bottom: 0.5rem; }
+    ::ng-deep json-schema-form mat-form-field .mat-form-field-wrapper .mat-form-field-flex
+      .mat-form-field-infix { width: initial; }
+  `]
             },] }
 ];
 MaterialFileComponent.ctorParameters = () => [
-    { type: JsonSchemaFormService }
+    { type: JsonSchemaFormService },
+    { type: undefined, decorators: [{ type: Inject, args: [MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: Optional }] },
+    { type: undefined, decorators: [{ type: Inject, args: [MAT_LABEL_GLOBAL_OPTIONS,] }, { type: Optional }] }
 ];
 MaterialFileComponent.propDecorators = {
     layoutNode: [{ type: Input }],
     layoutIndex: [{ type: Input }],
-    dataIndex: [{ type: Input }]
+    dataIndex: [{ type: Input }],
+    fileInput: [{ type: ViewChild, args: ['fileInput',] }]
 };
 
 class MaterialInputComponent {
@@ -1743,6 +1792,7 @@ MaterialDesignFrameworkModule.decorators = [
                     WidgetLibraryModule,
                     JsonSchemaFormModule,
                     MatMomentDateModule,
+                    MaterialFileInputModule,
                 ],
                 declarations: [
                     ...MATERIAL_FRAMEWORK_COMPONENTS,

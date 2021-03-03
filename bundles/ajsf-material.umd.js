@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ajsf/core'), require('@angular/material/core'), require('@angular/material/form-field'), require('moment'), require('lodash/cloneDeep'), require('@angular/common'), require('@angular/forms'), require('@angular/flex-layout'), require('@angular/material/autocomplete'), require('@angular/material/button'), require('@angular/material/button-toggle'), require('@angular/material/card'), require('@angular/material/checkbox'), require('@angular/material/chips'), require('@angular/material/datepicker'), require('@angular/material/expansion'), require('@angular/material/icon'), require('@angular/material/input'), require('@angular/material/radio'), require('@angular/material/select'), require('@angular/material/slide-toggle'), require('@angular/material/slider'), require('@angular/material/stepper'), require('@angular/material/tabs'), require('@angular/material/tooltip'), require('@angular/material/menu'), require('@angular/material/toolbar'), require('@angular/flex-layout/core'), require('@angular/material-moment-adapter')) :
-    typeof define === 'function' && define.amd ? define('@ajsf/material', ['exports', '@angular/core', '@ajsf/core', '@angular/material/core', '@angular/material/form-field', 'moment', 'lodash/cloneDeep', '@angular/common', '@angular/forms', '@angular/flex-layout', '@angular/material/autocomplete', '@angular/material/button', '@angular/material/button-toggle', '@angular/material/card', '@angular/material/checkbox', '@angular/material/chips', '@angular/material/datepicker', '@angular/material/expansion', '@angular/material/icon', '@angular/material/input', '@angular/material/radio', '@angular/material/select', '@angular/material/slide-toggle', '@angular/material/slider', '@angular/material/stepper', '@angular/material/tabs', '@angular/material/tooltip', '@angular/material/menu', '@angular/material/toolbar', '@angular/flex-layout/core', '@angular/material-moment-adapter'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ajsf = global.ajsf || {}, global.ajsf.material = {}), global.ng.core, global['@ajsf/core'], global.ng.material.core, global.ng.material.formField, global.moment, global['lodash-es'], global.ng.common, global.ng.forms, global.ng.flexLayout, global.ng.material.autocomplete, global.ng.material.button, global.ng.material.buttonToggle, global.ng.material.card, global.ng.material.checkbox, global.ng.material.chips, global.ng.material.datepicker, global.ng.material.expansion, global.ng.material.icon, global.ng.material.input, global.ng.material.radio, global.ng.material.select, global.ng.material.slideToggle, global.ng.material.slider, global.ng.material.stepper, global.ng.material.tabs, global.ng.material.tooltip, global.ng.material.menu, global.ng.material.toolbar, global.ng.flexLayout.core, global.ng.materialMomentAdapter));
-}(this, (function (exports, core, core$1, core$2, formField, moment, cloneDeep, common, forms, flexLayout, autocomplete, button, buttonToggle, card, checkbox, chips, datepicker, expansion, icon, input, radio, select, slideToggle, slider, stepper, tabs, tooltip, menu, toolbar, core$3, materialMomentAdapter) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ajsf/core'), require('@angular/material/core'), require('@angular/material/form-field'), require('moment'), require('lodash/cloneDeep'), require('@angular/common'), require('@angular/forms'), require('@angular/flex-layout'), require('@angular/material/autocomplete'), require('@angular/material/button'), require('@angular/material/button-toggle'), require('@angular/material/card'), require('@angular/material/checkbox'), require('@angular/material/chips'), require('@angular/material/datepicker'), require('@angular/material/expansion'), require('@angular/material/icon'), require('@angular/material/input'), require('@angular/material/radio'), require('@angular/material/select'), require('@angular/material/slide-toggle'), require('@angular/material/slider'), require('@angular/material/stepper'), require('@angular/material/tabs'), require('@angular/material/tooltip'), require('@angular/material/menu'), require('@angular/material/toolbar'), require('@angular/flex-layout/core'), require('@angular/material-moment-adapter'), require('ngx-material-file-input')) :
+    typeof define === 'function' && define.amd ? define('@ajsf/material', ['exports', '@angular/core', '@ajsf/core', '@angular/material/core', '@angular/material/form-field', 'moment', 'lodash/cloneDeep', '@angular/common', '@angular/forms', '@angular/flex-layout', '@angular/material/autocomplete', '@angular/material/button', '@angular/material/button-toggle', '@angular/material/card', '@angular/material/checkbox', '@angular/material/chips', '@angular/material/datepicker', '@angular/material/expansion', '@angular/material/icon', '@angular/material/input', '@angular/material/radio', '@angular/material/select', '@angular/material/slide-toggle', '@angular/material/slider', '@angular/material/stepper', '@angular/material/tabs', '@angular/material/tooltip', '@angular/material/menu', '@angular/material/toolbar', '@angular/flex-layout/core', '@angular/material-moment-adapter', 'ngx-material-file-input'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ajsf = global.ajsf || {}, global.ajsf.material = {}), global.ng.core, global['@ajsf/core'], global.ng.material.core, global.ng.material.formField, global.moment, global['lodash-es'], global.ng.common, global.ng.forms, global.ng.flexLayout, global.ng.material.autocomplete, global.ng.material.button, global.ng.material.buttonToggle, global.ng.material.card, global.ng.material.checkbox, global.ng.material.chips, global.ng.material.datepicker, global.ng.material.expansion, global.ng.material.icon, global.ng.material.input, global.ng.material.radio, global.ng.material.select, global.ng.material.slideToggle, global.ng.material.slider, global.ng.material.stepper, global.ng.material.tabs, global.ng.material.tooltip, global.ng.material.menu, global.ng.material.toolbar, global.ng.flexLayout.core, global.ng.materialMomentAdapter, global.ngxMaterialFileInput));
+}(this, (function (exports, core, core$1, core$2, formField, moment, cloneDeep, common, forms, flexLayout, autocomplete, button, buttonToggle, card, checkbox, chips, datepicker, expansion, icon, input, radio, select, slideToggle, slider, stepper, tabs, tooltip, menu, toolbar, core$3, materialMomentAdapter, ngxMaterialFileInput) { 'use strict';
 
     function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -912,10 +912,18 @@
         parent: [{ type: core.Input }]
     };
 
-    // TODO: Add this control
+    var toBase64 = function (file) { return new Promise(function (resolve, reject) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () { return resolve(reader.result); };
+        reader.onerror = function (error) { return reject(error); };
+    }); };
+    var ɵ0 = toBase64;
     var MaterialFileComponent = /** @class */ (function () {
-        function MaterialFileComponent(jsf) {
+        function MaterialFileComponent(jsf, matFormFieldDefaultOptions, matLabelGlobalOptions) {
             this.jsf = jsf;
+            this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
+            this.matLabelGlobalOptions = matLabelGlobalOptions;
             this.controlDisabled = false;
             this.boundControl = false;
         }
@@ -924,7 +932,26 @@
             this.jsf.initializeControl(this);
         };
         MaterialFileComponent.prototype.updateValue = function (event) {
-            this.jsf.updateValue(this, event.target.value);
+            return __awaiter(this, void 0, void 0, function () {
+                var base64String;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            console.log("!!!", event.target.files);
+                            if (!(event.target && event.target.files && event.target.files.length)) return [3 /*break*/, 2];
+                            return [4 /*yield*/, toBase64(event.target.files[0])];
+                        case 1:
+                            base64String = _a.sent();
+                            console.log(base64String);
+                            this.formControl.setValue(base64String);
+                            return [3 /*break*/, 3];
+                        case 2:
+                            this.formControl.setValue(null);
+                            _a.label = 3;
+                        case 3: return [2 /*return*/];
+                    }
+                });
+            });
         };
         return MaterialFileComponent;
     }());
@@ -932,16 +959,20 @@
         { type: core.Component, args: [{
                     // tslint:disable-next-line:component-selector
                     selector: 'material-file-widget',
-                    template: ""
+                    template: "<mat-form-field [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n                    [class]=\"options?.htmlClass || ''\"\n                    [floatLabel]=\"options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')\"\n                    [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n                    [style.width]=\"'100%'\">\n      <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <ngx-mat-file-input #fileInput (change)=\"updateValue($event);options.showErrors = true\" [required]=\"options?.required\" (blur)=\"options.showErrors = true\"\n        >\n      </ngx-mat-file-input>\n      <button mat-icon-button matSuffix *ngIf=\"!fileInput.empty\" (click)=\"fileInput.clear($event);updateValue($event)\" style='cursor:pointer;'>\n        <mat-icon>clear</mat-icon>\n      </button>\n      <mat-icon matSuffix *ngIf=\"fileInput.empty\" style='cursor:pointer'>folder</mat-icon>\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n    </mat-form-field>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                    styles: ["\n    mat-error { font-size: 75%; margin-top: -1rem; margin-bottom: 0.5rem; }\n    ::ng-deep json-schema-form mat-form-field .mat-form-field-wrapper .mat-form-field-flex\n      .mat-form-field-infix { width: initial; }\n  "]
                 },] }
     ];
     MaterialFileComponent.ctorParameters = function () { return [
-        { type: core$1.JsonSchemaFormService }
+        { type: core$1.JsonSchemaFormService },
+        { type: undefined, decorators: [{ type: core.Inject, args: [formField.MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: core.Optional }] },
+        { type: undefined, decorators: [{ type: core.Inject, args: [core$2.MAT_LABEL_GLOBAL_OPTIONS,] }, { type: core.Optional }] }
     ]; };
     MaterialFileComponent.propDecorators = {
         layoutNode: [{ type: core.Input }],
         layoutIndex: [{ type: core.Input }],
-        dataIndex: [{ type: core.Input }]
+        dataIndex: [{ type: core.Input }],
+        fileInput: [{ type: core.ViewChild, args: ['fileInput',] }]
     };
 
     var MaterialInputComponent = /** @class */ (function () {
@@ -1450,6 +1481,7 @@
                         core$1.WidgetLibraryModule,
                         core$1.JsonSchemaFormModule,
                         materialMomentAdapter.MatMomentDateModule,
+                        ngxMaterialFileInput.MaterialFileInputModule,
                     ]),
                     declarations: __spread(MATERIAL_FRAMEWORK_COMPONENTS),
                     exports: __spread([
