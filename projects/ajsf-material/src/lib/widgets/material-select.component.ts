@@ -26,6 +26,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
         [placeholder]="options?.notitle ? options?.placeholder : options?.title"
         [required]="options?.required"
         [style.width]="'100%'"
+        [tabIndex]="options?.tabindex ? options?.tabindex : 0"
         (blur)="options.showErrors = true">
         <ng-template ngFor let-selectItem [ngForOf]="selectList">
           <mat-option *ngIf="!isArray(selectItem?.items)"
@@ -51,6 +52,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
         [required]="options?.required"
         [style.width]="'100%'"
         [value]="controlValue"
+        [tabIndex]="options?.tabindex ? options?.tabindex : 0"
         (blur)="options.showErrors = true"
         (change)="updateValue($event)">
         <ng-template ngFor let-selectItem [ngForOf]="selectList">

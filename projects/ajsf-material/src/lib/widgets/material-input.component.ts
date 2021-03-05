@@ -30,6 +30,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
         [required]="options?.required"
         [style.width]="'100%'"
         [type]="layoutNode?.type"
+        [tabindex]="options?.tabindex ? options?.tabindex : 0"
         (blur)="options.showErrors = true">
       <input matInput *ngIf="!boundControl"
         [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
@@ -46,6 +47,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
         [style.width]="'100%'"
         [type]="layoutNode?.type"
         [value]="controlValue"
+        [tabindex]="options?.tabindex ? options?.tabindex : 0"
         (input)="updateValue($event)"
         (blur)="options.showErrors = true">
       <span matSuffix *ngIf="options?.suffix || options?.fieldAddonRight"

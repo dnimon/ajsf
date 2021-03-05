@@ -34,6 +34,7 @@ import * as moment from 'moment';
         [value]="dateValueStr"
         [style.width]="'100%'"
         (blur)="options.showErrors = true"
+        [tabindex]="options?.tabindex ? options?.tabindex : 0"
         (dateChange)="updateValue($event)"
         (dateInput)="updateValue($event)"
         [style.cursor]="'default'">
@@ -51,6 +52,7 @@ import * as moment from 'moment';
         [required]="options?.required"
         [style.width]="'100%'"
         [readonly]="options?.readonly"
+        [tabindex]="options?.tabindex ? options?.tabindex : 0"
         (blur)="options.showErrors = true"
         (dateChange)="updateValue($event)"
         (dateInput)="updateValue($event)">
