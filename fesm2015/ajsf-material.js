@@ -766,6 +766,7 @@ MaterialDatepickerComponent.decorators = [
         [value]="dateValueStr"
         [style.width]="'100%'"
         (blur)="options.showErrors = true"
+        [tabindex]="options?.tabindex ? options?.tabindex : 0"
         (dateChange)="updateValue($event)"
         (dateInput)="updateValue($event)"
         [style.cursor]="'default'">
@@ -783,6 +784,7 @@ MaterialDatepickerComponent.decorators = [
         [required]="options?.required"
         [style.width]="'100%'"
         [readonly]="options?.readonly"
+        [tabindex]="options?.tabindex ? options?.tabindex : 0"
         (blur)="options.showErrors = true"
         (dateChange)="updateValue($event)"
         (dateInput)="updateValue($event)">
@@ -957,7 +959,7 @@ MaterialFileComponent.decorators = [
       <mat-label *ngIf="!options?.notitle">{{options?.title}}</mat-label>
       <span matPrefix *ngIf="options?.prefix || options?.fieldAddonLeft"
         [innerHTML]="options?.prefix || options?.fieldAddonLeft"></span>
-      <ngx-mat-file-input #fileInput (change)="updateValue($event);options.showErrors = true" [required]="options?.required" (blur)="options.showErrors = true"
+      <ngx-mat-file-input [tabindex]="options?.tabindex ? options?.tabindex : 0" #fileInput (change)="updateValue($event);options.showErrors = true" [required]="options?.required" (blur)="options.showErrors = true"
         >
       </ngx-mat-file-input>
       <button mat-icon-button matSuffix *ngIf="!fileInput.empty" (click)="fileInput.clear($event);updateValue($event)" style='cursor:pointer;'>
@@ -1037,6 +1039,7 @@ MaterialInputComponent.decorators = [
         [required]="options?.required"
         [style.width]="'100%'"
         [type]="layoutNode?.type"
+        [tabindex]="options?.tabindex ? options?.tabindex : 0"
         (blur)="options.showErrors = true">
       <input matInput *ngIf="!boundControl"
         [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
@@ -1053,6 +1056,7 @@ MaterialInputComponent.decorators = [
         [style.width]="'100%'"
         [type]="layoutNode?.type"
         [value]="controlValue"
+        [tabindex]="options?.tabindex ? options?.tabindex : 0"
         (input)="updateValue($event)"
         (blur)="options.showErrors = true">
       <span matSuffix *ngIf="options?.suffix || options?.fieldAddonRight"
@@ -1346,6 +1350,7 @@ MaterialSelectComponent.decorators = [
         [placeholder]="options?.notitle ? options?.placeholder : options?.title"
         [required]="options?.required"
         [style.width]="'100%'"
+        [tabIndex]="options?.tabindex ? options?.tabindex : 0"
         (blur)="options.showErrors = true">
         <ng-template ngFor let-selectItem [ngForOf]="selectList">
           <mat-option *ngIf="!isArray(selectItem?.items)"
@@ -1371,6 +1376,7 @@ MaterialSelectComponent.decorators = [
         [required]="options?.required"
         [style.width]="'100%'"
         [value]="controlValue"
+        [tabIndex]="options?.tabindex ? options?.tabindex : 0"
         (blur)="options.showErrors = true"
         (change)="updateValue($event)">
         <ng-template ngFor let-selectItem [ngForOf]="selectList">
