@@ -3,7 +3,7 @@ import { FormControl, FormArray, FormGroup, FormsModule, ReactiveFormsModule } f
 import { Injectable, ɵɵdefineInjectable, Component, ChangeDetectionStrategy, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef, ɵɵinject, Inject, EventEmitter, ChangeDetectorRef, Output, Directive, ElementRef, NgZone, NgModule } from '@angular/core';
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual$1 from 'lodash/isEqual';
-import { from, Observable, forkJoin, Subject } from 'rxjs';
+import { from, Observable, forkJoin, Subject, Subscription } from 'rxjs';
 import Ajv from 'ajv';
 import jsonDraft6 from 'ajv/lib/refs/json-schema-draft-06.json';
 import { map } from 'rxjs/operators';
@@ -6323,8 +6323,15 @@ class JsonSchemaFormService {
                 validationMessages: {} // set by setLanguage()
             }
         };
+        this.subscriptions = new Subscription();
         this.setLanguage(this.language);
         this.ajv.addMetaSchema(jsonDraft6);
+    }
+    ngOnDestroy() {
+        if (this.formValueSubscription) {
+            this.formValueSubscription.unsubscribe();
+        }
+        this.subscriptions.unsubscribe();
     }
     setLanguage(language = 'en-US') {
         this.language = language;
@@ -6407,7 +6414,9 @@ class JsonSchemaFormService {
     }
     validateData(newValue, updateSubscriptions = true) {
         // Format raw form data to correct data types
+        console.log("ajsf ADASDASDASD23123123123123", JSON.stringify(newValue));
         this.data = formatFormData(newValue, this.dataMap, this.dataRecursiveRefMap, this.arrayMap, this.formOptions.returnEmptyFields);
+        console.log("ajsf ADASDASDASD23123123123123 data", JSON.stringify(this.data));
         this.isValid = this.validateFormData(this.data);
         this.validData = this.isValid ? this.data : null;
         const compileErrors = errors => {
@@ -6440,7 +6449,9 @@ class JsonSchemaFormService {
             if (this.formValueSubscription) {
                 this.formValueSubscription.unsubscribe();
             }
-            this.formValueSubscription = this.formGroup.valueChanges.subscribe(formValue => this.validateData(formValue));
+            this.formValueSubscription = this.formGroup.valueChanges.subscribe(formValue => {
+                this.validateData(formValue);
+            });
         }
     }
     buildLayout(widgetLibrary) {
@@ -6642,15 +6653,15 @@ class JsonSchemaFormService {
                 this.formOptions.validateOnRender === true ||
                     (this.formOptions.validateOnRender === 'auto' &&
                         hasValue(ctx.controlValue));
-            ctx.formControl.statusChanges.subscribe(status => (ctx.options.errorMessage =
+            this.subscriptions.add(ctx.formControl.statusChanges.subscribe(status => (ctx.options.errorMessage =
                 status === 'VALID'
                     ? null
-                    : this.formatErrors(ctx.formControl.errors, ctx.options.validationMessages)));
-            ctx.formControl.valueChanges.subscribe(value => {
+                    : this.formatErrors(ctx.formControl.errors, ctx.options.validationMessages))));
+            this.subscriptions.add(ctx.formControl.valueChanges.subscribe(value => {
                 if (!!value) {
                     ctx.controlValue = value;
                 }
-            });
+            }));
         }
         else {
             ctx.controlName = ctx.layoutNode.name;
@@ -7901,6 +7912,10 @@ class SubmitComponent {
         this.jsf = jsf;
         this.controlDisabled = false;
         this.boundControl = false;
+        this.subscriptions = new Subscription();
+    }
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe();
     }
     ngOnInit() {
         this.options = this.layoutNode.options || {};
@@ -7910,7 +7925,7 @@ class SubmitComponent {
         }
         else if (this.jsf.formOptions.disableInvalidSubmit) {
             this.controlDisabled = !this.jsf.isValid;
-            this.jsf.isValidChanges.subscribe(isValid => this.controlDisabled = !isValid);
+            this.subscriptions.add(this.jsf.isValidChanges.subscribe(isValid => this.controlDisabled = !isValid));
         }
         if (this.controlValue === null || this.controlValue === undefined) {
             this.controlValue = this.options.title;
@@ -8437,6 +8452,7 @@ class JsonSchemaFormComponent {
         this.formValueSubscription = null;
         this.formInitialized = false;
         this.objectWrap = false; // Is non-object input schema wrapped in an object?
+        this.subscriptions = new Subscription();
         this.previousInputs = {
             schema: null, layout: null, data: null, options: null, framework: null,
             widgets: null, form: null, model: null, JSONSchema: null, UISchema: null,
@@ -8496,6 +8512,9 @@ class JsonSchemaFormComponent {
     ngOnInit() {
         this.updateForm();
         this.loadAssets();
+    }
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe();
     }
     ngOnChanges(changes) {
         this.updateForm();
@@ -9007,16 +9026,16 @@ class JsonSchemaFormComponent {
             //   }, 'top-down');
             // }
             // Subscribe to form changes to output live data, validation, and errors
-            this.jsf.dataChanges.subscribe(data => {
+            this.subscriptions.add(this.jsf.dataChanges.subscribe(data => {
                 this.onChanges.emit(this.objectWrap ? data['1'] : data);
                 if (this.formValuesInput && this.formValuesInput.indexOf('.') === -1) {
                     this[`${this.formValuesInput}Change`].emit(this.objectWrap ? data['1'] : data);
                 }
-            });
+            }));
             // Trigger change detection on statusChanges to show updated errors
-            this.jsf.formGroup.statusChanges.subscribe(() => this.changeDetector.markForCheck());
-            this.jsf.isValidChanges.subscribe(isValid => this.isValid.emit(isValid));
-            this.jsf.validationErrorChanges.subscribe(err => this.validationErrors.emit(err));
+            this.subscriptions.add(this.jsf.formGroup.statusChanges.subscribe(() => this.changeDetector.markForCheck()));
+            this.subscriptions.add(this.jsf.isValidChanges.subscribe(isValid => this.isValid.emit(isValid)));
+            this.subscriptions.add(this.jsf.validationErrorChanges.subscribe(err => this.validationErrors.emit(err)));
             // Output final schema, final layout, and initial data
             this.formSchema.emit(this.jsf.schema);
             this.formLayout.emit(this.jsf.layout);

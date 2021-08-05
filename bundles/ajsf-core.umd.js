@@ -7151,9 +7151,16 @@
                     validationMessages: {} // set by setLanguage()
                 }
             };
+            this.subscriptions = new rxjs.Subscription();
             this.setLanguage(this.language);
             this.ajv.addMetaSchema(jsonDraft6__default['default']);
         }
+        JsonSchemaFormService.prototype.ngOnDestroy = function () {
+            if (this.formValueSubscription) {
+                this.formValueSubscription.unsubscribe();
+            }
+            this.subscriptions.unsubscribe();
+        };
         JsonSchemaFormService.prototype.setLanguage = function (language) {
             if (language === void 0) { language = 'en-US'; }
             this.language = language;
@@ -7249,7 +7256,9 @@
         JsonSchemaFormService.prototype.validateData = function (newValue, updateSubscriptions) {
             if (updateSubscriptions === void 0) { updateSubscriptions = true; }
             // Format raw form data to correct data types
+            console.log("ajsf ADASDASDASD23123123123123", JSON.stringify(newValue));
             this.data = formatFormData(newValue, this.dataMap, this.dataRecursiveRefMap, this.arrayMap, this.formOptions.returnEmptyFields);
+            console.log("ajsf ADASDASDASD23123123123123 data", JSON.stringify(this.data));
             this.isValid = this.validateFormData(this.data);
             this.validData = this.isValid ? this.data : null;
             var compileErrors = function (errors) {
@@ -7285,7 +7294,9 @@
                 if (this.formValueSubscription) {
                     this.formValueSubscription.unsubscribe();
                 }
-                this.formValueSubscription = this.formGroup.valueChanges.subscribe(function (formValue) { return _this.validateData(formValue); });
+                this.formValueSubscription = this.formGroup.valueChanges.subscribe(function (formValue) {
+                    _this.validateData(formValue);
+                });
             }
         };
         JsonSchemaFormService.prototype.buildLayout = function (widgetLibrary) {
@@ -7511,15 +7522,15 @@
                     this.formOptions.validateOnRender === true ||
                         (this.formOptions.validateOnRender === 'auto' &&
                             hasValue(ctx.controlValue));
-                ctx.formControl.statusChanges.subscribe(function (status) { return (ctx.options.errorMessage =
+                this.subscriptions.add(ctx.formControl.statusChanges.subscribe(function (status) { return (ctx.options.errorMessage =
                     status === 'VALID'
                         ? null
-                        : _this.formatErrors(ctx.formControl.errors, ctx.options.validationMessages)); });
-                ctx.formControl.valueChanges.subscribe(function (value) {
+                        : _this.formatErrors(ctx.formControl.errors, ctx.options.validationMessages)); }));
+                this.subscriptions.add(ctx.formControl.valueChanges.subscribe(function (value) {
                     if (!!value) {
                         ctx.controlValue = value;
                     }
-                });
+                }));
             }
             else {
                 ctx.controlName = ctx.layoutNode.name;
@@ -8462,7 +8473,11 @@
             this.jsf = jsf;
             this.controlDisabled = false;
             this.boundControl = false;
+            this.subscriptions = new rxjs.Subscription();
         }
+        SubmitComponent.prototype.ngOnDestroy = function () {
+            this.subscriptions.unsubscribe();
+        };
         SubmitComponent.prototype.ngOnInit = function () {
             var _this = this;
             this.options = this.layoutNode.options || {};
@@ -8472,7 +8487,7 @@
             }
             else if (this.jsf.formOptions.disableInvalidSubmit) {
                 this.controlDisabled = !this.jsf.isValid;
-                this.jsf.isValidChanges.subscribe(function (isValid) { return _this.controlDisabled = !isValid; });
+                this.subscriptions.add(this.jsf.isValidChanges.subscribe(function (isValid) { return _this.controlDisabled = !isValid; }));
             }
             if (this.controlValue === null || this.controlValue === undefined) {
                 this.controlValue = this.options.title;
@@ -8960,6 +8975,7 @@
             this.formValueSubscription = null;
             this.formInitialized = false;
             this.objectWrap = false; // Is non-object input schema wrapped in an object?
+            this.subscriptions = new rxjs.Subscription();
             this.previousInputs = {
                 schema: null, layout: null, data: null, options: null, framework: null,
                 widgets: null, form: null, model: null, JSONSchema: null, UISchema: null,
@@ -9023,6 +9039,9 @@
         JsonSchemaFormComponent.prototype.ngOnInit = function () {
             this.updateForm();
             this.loadAssets();
+        };
+        JsonSchemaFormComponent.prototype.ngOnDestroy = function () {
+            this.subscriptions.unsubscribe();
         };
         JsonSchemaFormComponent.prototype.ngOnChanges = function (changes) {
             this.updateForm();
@@ -9549,16 +9568,16 @@
                 //   }, 'top-down');
                 // }
                 // Subscribe to form changes to output live data, validation, and errors
-                this.jsf.dataChanges.subscribe(function (data) {
+                this.subscriptions.add(this.jsf.dataChanges.subscribe(function (data) {
                     _this.onChanges.emit(_this.objectWrap ? data['1'] : data);
                     if (_this.formValuesInput && _this.formValuesInput.indexOf('.') === -1) {
                         _this[_this.formValuesInput + "Change"].emit(_this.objectWrap ? data['1'] : data);
                     }
-                });
+                }));
                 // Trigger change detection on statusChanges to show updated errors
-                this.jsf.formGroup.statusChanges.subscribe(function () { return _this.changeDetector.markForCheck(); });
-                this.jsf.isValidChanges.subscribe(function (isValid) { return _this.isValid.emit(isValid); });
-                this.jsf.validationErrorChanges.subscribe(function (err) { return _this.validationErrors.emit(err); });
+                this.subscriptions.add(this.jsf.formGroup.statusChanges.subscribe(function () { return _this.changeDetector.markForCheck(); }));
+                this.subscriptions.add(this.jsf.isValidChanges.subscribe(function (isValid) { return _this.isValid.emit(isValid); }));
+                this.subscriptions.add(this.jsf.validationErrorChanges.subscribe(function (err) { return _this.validationErrors.emit(err); }));
                 // Output final schema, final layout, and initial data
                 this.formSchema.emit(this.jsf.schema);
                 this.formLayout.emit(this.jsf.layout);

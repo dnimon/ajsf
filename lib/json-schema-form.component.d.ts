@@ -3,6 +3,7 @@ import { ControlValueAccessor } from '@angular/forms';
 import { FrameworkLibraryService } from './framework-library/framework-library.service';
 import { JsonSchemaFormService } from './json-schema-form.service';
 import { WidgetLibraryService } from './widget-library/widget-library.service';
+import { Subscription } from 'rxjs';
 /**
  * @module 'JsonSchemaFormComponent' - Angular JSON Schema Form
  *
@@ -46,6 +47,7 @@ export declare class JsonSchemaFormComponent implements ControlValueAccessor, On
     formValueSubscription: any;
     formInitialized: boolean;
     objectWrap: boolean;
+    subscriptions: Subscription;
     formValuesInput: string;
     previousInputs: {
         schema: any;
@@ -98,6 +100,7 @@ export declare class JsonSchemaFormComponent implements ControlValueAccessor, On
     private loadStyleSheets;
     private loadAssets;
     ngOnInit(): void;
+    ngOnDestroy(): void;
     ngOnChanges(changes: SimpleChanges): void;
     writeValue(value: any): void;
     registerOnChange(fn: Function): void;

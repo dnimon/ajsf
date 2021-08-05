@@ -1,5 +1,5 @@
 import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 export interface TitleMapItem {
     name?: string;
     value?: any;
@@ -48,7 +48,9 @@ export declare class JsonSchemaFormService {
     hasRootReference: boolean;
     language: string;
     defaultFormOptions: any;
+    subscriptions: Subscription;
     constructor();
+    ngOnDestroy(): void;
     setLanguage(language?: string): void;
     getData(): any;
     getSchema(): any;
