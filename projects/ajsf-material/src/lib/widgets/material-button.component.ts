@@ -1,6 +1,7 @@
 import { AbstractControl } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 import { JsonSchemaFormService, hasOwn } from '@ajsf/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -33,10 +34,15 @@ export class MaterialButtonComponent implements OnInit {
   @Input() layoutNode: any;
   @Input() layoutIndex: number[];
   @Input() dataIndex: number[];
+  subscriptions: Subscription = new Subscription();
 
   constructor(
     private jsf: JsonSchemaFormService
   ) { }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
 
   ngOnInit() {
     this.options = this.layoutNode.options || {};
@@ -45,7 +51,7 @@ export class MaterialButtonComponent implements OnInit {
       this.controlDisabled = this.options.disabled;
     } else if (this.jsf.formOptions.disableInvalidSubmit) {
       this.controlDisabled = !this.jsf.isValid;
-      this.jsf.isValidChanges.subscribe(isValid => this.controlDisabled = !isValid);
+      this.subscriptions.add(this.jsf.isValidChanges.subscribe(isValid => this.controlDisabled = !isValid));
     }
   }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import cloneDeep from 'lodash/cloneDeep';
 import Ajv from 'ajv';
 import jsonDraft6 from 'ajv/lib/refs/json-schema-draft-06.json';
@@ -145,9 +145,18 @@ export class JsonSchemaFormService {
     }
   };
 
+  subscriptions: Subscription = new Subscription();
+
   constructor() {
     this.setLanguage(this.language);
     this.ajv.addMetaSchema(jsonDraft6);
+  }
+
+  ngOnDestroy() {
+    if (this.formValueSubscription) {
+      this.formValueSubscription.unsubscribe();
+    }
+    this.subscriptions.unsubscribe();
   }
 
   setLanguage(language: string = 'en-US') {
@@ -241,6 +250,7 @@ export class JsonSchemaFormService {
 
   validateData(newValue: any, updateSubscriptions = true): void {
     // Format raw form data to correct data types
+    console.log("ajsf ADASDASDASD23123123123123", JSON.stringify(newValue));
     this.data = formatFormData(
       newValue,
       this.dataMap,
@@ -248,6 +258,7 @@ export class JsonSchemaFormService {
       this.arrayMap,
       this.formOptions.returnEmptyFields
     );
+    console.log("ajsf ADASDASDASD23123123123123 data", JSON.stringify(this.data));
     this.isValid = this.validateFormData(this.data);
     this.validData = this.isValid ? this.data : null;
     const compileErrors = errors => {
@@ -288,7 +299,9 @@ export class JsonSchemaFormService {
         this.formValueSubscription.unsubscribe();
       }
       this.formValueSubscription = this.formGroup.valueChanges.subscribe(
-        formValue => this.validateData(formValue)
+        formValue => {
+          this.validateData(formValue)
+        }
       );
     }
   }
@@ -560,7 +573,7 @@ export class JsonSchemaFormService {
         this.formOptions.validateOnRender === true ||
         (this.formOptions.validateOnRender === 'auto' &&
           hasValue(ctx.controlValue));
-      ctx.formControl.statusChanges.subscribe(
+      this.subscriptions.add(ctx.formControl.statusChanges.subscribe(
         status =>
           (ctx.options.errorMessage =
             status === 'VALID'
@@ -569,12 +582,12 @@ export class JsonSchemaFormService {
                 ctx.formControl.errors,
                 ctx.options.validationMessages
               ))
-      );
-      ctx.formControl.valueChanges.subscribe(value => {
+      ));
+      this.subscriptions.add(ctx.formControl.valueChanges.subscribe(value => {
         if (!!value) {
           ctx.controlValue = value;
         }
-      });
+      }));
     } else {
       ctx.controlName = ctx.layoutNode.name;
       ctx.controlValue = ctx.layoutNode.value || null;

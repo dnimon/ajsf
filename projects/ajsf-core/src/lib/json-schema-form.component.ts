@@ -28,6 +28,7 @@ import { JsonPointer } from './shared/jsonpointer.functions';
 import { JsonSchemaFormService } from './json-schema-form.service';
 import { resolveSchemaReferences } from './shared/json-schema.functions';
 import { WidgetLibraryService } from './widget-library/widget-library.service';
+import { Subscription } from 'rxjs';
 
 
 /**
@@ -75,6 +76,7 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
   formValueSubscription: any = null;
   formInitialized = false;
   objectWrap = false; // Is non-object input schema wrapped in an object?
+  subscriptions: Subscription = new Subscription();
 
   formValuesInput: string; // Name of the input providing the form data
   previousInputs: { // Previous input values, to detect which input triggers onChanges
@@ -183,6 +185,10 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
   ngOnInit() {
     this.updateForm();
     this.loadAssets();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -715,17 +721,17 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
       // }
 
       // Subscribe to form changes to output live data, validation, and errors
-      this.jsf.dataChanges.subscribe(data => {
+      this.subscriptions.add(this.jsf.dataChanges.subscribe(data => {
         this.onChanges.emit(this.objectWrap ? data['1'] : data);
         if (this.formValuesInput && this.formValuesInput.indexOf('.') === -1) {
           this[`${this.formValuesInput}Change`].emit(this.objectWrap ? data['1'] : data);
         }
-      });
+      }));
 
       // Trigger change detection on statusChanges to show updated errors
-      this.jsf.formGroup.statusChanges.subscribe(() => this.changeDetector.markForCheck());
-      this.jsf.isValidChanges.subscribe(isValid => this.isValid.emit(isValid));
-      this.jsf.validationErrorChanges.subscribe(err => this.validationErrors.emit(err));
+      this.subscriptions.add(this.jsf.formGroup.statusChanges.subscribe(() => this.changeDetector.markForCheck()));
+      this.subscriptions.add(this.jsf.isValidChanges.subscribe(isValid => this.isValid.emit(isValid)));
+      this.subscriptions.add(this.jsf.validationErrorChanges.subscribe(err => this.validationErrors.emit(err)));
 
       // Output final schema, final layout, and initial data
       this.formSchema.emit(this.jsf.schema);
