@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Inject, Optional, ChangeDetectorRef, ViewChild, Injectable, NgModule } from '@angular/core';
 import { JsonSchemaFormService, hasOwn, buildTitleMap, isDefined, isArray, Framework, WidgetLibraryModule, JsonSchemaFormModule, FrameworkLibraryService, WidgetLibraryService } from '@ajsf/core';
+import { Subscription } from 'rxjs';
 import { MAT_LABEL_GLOBAL_OPTIONS, MAT_DATE_LOCALE, MatNativeDateModule, DateAdapter } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
 import * as moment from 'moment';
@@ -363,6 +364,10 @@ class MaterialButtonComponent {
         this.jsf = jsf;
         this.controlDisabled = false;
         this.boundControl = false;
+        this.subscriptions = new Subscription();
+    }
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe();
     }
     ngOnInit() {
         this.options = this.layoutNode.options || {};
@@ -372,7 +377,7 @@ class MaterialButtonComponent {
         }
         else if (this.jsf.formOptions.disableInvalidSubmit) {
             this.controlDisabled = !this.jsf.isValid;
-            this.jsf.isValidChanges.subscribe(isValid => this.controlDisabled = !isValid);
+            this.subscriptions.add(this.jsf.isValidChanges.subscribe(isValid => this.controlDisabled = !isValid));
         }
     }
     updateValue(event) {
