@@ -3,7 +3,6 @@ import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { JsonSchemaFormService } from '@ajsf/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { Optional } from '@angular/core';
-import { MAT_LABEL_GLOBAL_OPTIONS } from '@angular/material/core';
 
 const toBase64 = file => new Promise((resolve, reject) => {
   const reader = new FileReader();
@@ -17,7 +16,7 @@ const toBase64 = file => new Promise((resolve, reject) => {
   selector: 'material-file-widget',
   template: `<mat-form-field [appearance]="options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'"
                     [class]="options?.htmlClass || ''"
-                    [floatLabel]="options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')"
+                    [floatLabel]="options?.floatLabel || matFormFieldDefaultOptions?.floatLabel || (options?.notitle ? 'never' : 'auto')"
                     [hideRequiredMarker]="options?.hideRequired ? 'true' : 'false'"
                     [style.width]="'100%'">
       <mat-label *ngIf="!options?.notitle">{{options?.title}}</mat-label>
@@ -57,8 +56,7 @@ export class MaterialFileComponent implements OnInit {
 
   constructor(
     private jsf: JsonSchemaFormService,
-    @Inject(MAT_FORM_FIELD_DEFAULT_OPTIONS) @Optional() public matFormFieldDefaultOptions,
-    @Inject(MAT_LABEL_GLOBAL_OPTIONS) @Optional() public matLabelGlobalOptions
+    @Inject(MAT_FORM_FIELD_DEFAULT_OPTIONS) @Optional() public matFormFieldDefaultOptions
   ) { }
 
   ngOnInit() {
