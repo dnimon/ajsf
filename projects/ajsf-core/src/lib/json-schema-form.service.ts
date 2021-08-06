@@ -250,7 +250,6 @@ export class JsonSchemaFormService {
 
   validateData(newValue: any, updateSubscriptions = true): void {
     // Format raw form data to correct data types
-    console.log("ajsf ADASDASDASD23123123123123", JSON.stringify(newValue));
     this.data = formatFormData(
       newValue,
       this.dataMap,
@@ -258,7 +257,6 @@ export class JsonSchemaFormService {
       this.arrayMap,
       this.formOptions.returnEmptyFields
     );
-    console.log("ajsf ADASDASDASD23123123123123 data", JSON.stringify(this.data));
     this.isValid = this.validateFormData(this.data);
     this.validData = this.isValid ? this.data : null;
     const compileErrors = errors => {
