@@ -3,7 +3,6 @@ import { OnInit } from '@angular/core';
 import { JsonSchemaFormService } from '@ajsf/core';
 export declare class MaterialInputComponent implements OnInit {
     matFormFieldDefaultOptions: any;
-    matLabelGlobalOptions: any;
     private jsf;
     formControl: AbstractControl;
     controlName: string;
@@ -15,7 +14,7 @@ export declare class MaterialInputComponent implements OnInit {
     layoutNode: any;
     layoutIndex: number[];
     dataIndex: number[];
-    constructor(matFormFieldDefaultOptions: any, matLabelGlobalOptions: any, jsf: JsonSchemaFormService);
+    constructor(matFormFieldDefaultOptions: any, jsf: JsonSchemaFormService);
     ngOnInit(): void;
     updateValue(event: any): void;
 }

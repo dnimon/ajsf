@@ -1,30 +1,29 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ajsf/core'), require('rxjs'), require('@angular/material/core'), require('@angular/material/form-field'), require('moment'), require('lodash/cloneDeep'), require('@angular/common'), require('@angular/forms'), require('@angular/flex-layout'), require('@angular/material/autocomplete'), require('@angular/material/button'), require('@angular/material/button-toggle'), require('@angular/material/card'), require('@angular/material/checkbox'), require('@angular/material/chips'), require('@angular/material/datepicker'), require('@angular/material/expansion'), require('@angular/material/icon'), require('@angular/material/input'), require('@angular/material/radio'), require('@angular/material/select'), require('@angular/material/slide-toggle'), require('@angular/material/slider'), require('@angular/material/stepper'), require('@angular/material/tabs'), require('@angular/material/tooltip'), require('@angular/material/menu'), require('@angular/material/toolbar'), require('@angular/flex-layout/core'), require('@angular/material-moment-adapter'), require('ngx-material-file-input')) :
-    typeof define === 'function' && define.amd ? define('@ajsf/material', ['exports', '@angular/core', '@ajsf/core', 'rxjs', '@angular/material/core', '@angular/material/form-field', 'moment', 'lodash/cloneDeep', '@angular/common', '@angular/forms', '@angular/flex-layout', '@angular/material/autocomplete', '@angular/material/button', '@angular/material/button-toggle', '@angular/material/card', '@angular/material/checkbox', '@angular/material/chips', '@angular/material/datepicker', '@angular/material/expansion', '@angular/material/icon', '@angular/material/input', '@angular/material/radio', '@angular/material/select', '@angular/material/slide-toggle', '@angular/material/slider', '@angular/material/stepper', '@angular/material/tabs', '@angular/material/tooltip', '@angular/material/menu', '@angular/material/toolbar', '@angular/flex-layout/core', '@angular/material-moment-adapter', 'ngx-material-file-input'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ajsf = global.ajsf || {}, global.ajsf.material = {}), global.ng.core, global['@ajsf/core'], global.rxjs, global.ng.material.core, global.ng.material.formField, global.moment, global['lodash-es'], global.ng.common, global.ng.forms, global.ng.flexLayout, global.ng.material.autocomplete, global.ng.material.button, global.ng.material.buttonToggle, global.ng.material.card, global.ng.material.checkbox, global.ng.material.chips, global.ng.material.datepicker, global.ng.material.expansion, global.ng.material.icon, global.ng.material.input, global.ng.material.radio, global.ng.material.select, global.ng.material.slideToggle, global.ng.material.slider, global.ng.material.stepper, global.ng.material.tabs, global.ng.material.tooltip, global.ng.material.menu, global.ng.material.toolbar, global.ng.flexLayout.core, global.ng.materialMomentAdapter, global.ngxMaterialFileInput));
-}(this, (function (exports, core, core$1, rxjs, core$2, formField, moment, cloneDeep, common, forms, flexLayout, autocomplete, button, buttonToggle, card, checkbox, chips, datepicker, expansion, icon, input, radio, select, slideToggle, slider, stepper, tabs, tooltip, menu, toolbar, core$3, materialMomentAdapter, ngxMaterialFileInput) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@ajsf/core'), require('rxjs'), require('@angular/material/form-field'), require('moment'), require('lodash/cloneDeep'), require('@angular/common'), require('@angular/forms'), require('@angular/flex-layout'), require('@angular/material/autocomplete'), require('@angular/material/button'), require('@angular/material/button-toggle'), require('@angular/material/card'), require('@angular/material/checkbox'), require('@angular/material/chips'), require('@angular/material/core'), require('@angular/material/datepicker'), require('@angular/material/expansion'), require('@angular/material/icon'), require('@angular/material/input'), require('@angular/material/radio'), require('@angular/material/select'), require('@angular/material/slide-toggle'), require('@angular/material/slider'), require('@angular/material/stepper'), require('@angular/material/tabs'), require('@angular/material/tooltip'), require('@angular/material/menu'), require('@angular/material/toolbar'), require('@angular/flex-layout/core'), require('@angular/material-moment-adapter'), require('ngx-material-file-input')) :
+    typeof define === 'function' && define.amd ? define('@ajsf/material', ['exports', '@angular/core', '@ajsf/core', 'rxjs', '@angular/material/form-field', 'moment', 'lodash/cloneDeep', '@angular/common', '@angular/forms', '@angular/flex-layout', '@angular/material/autocomplete', '@angular/material/button', '@angular/material/button-toggle', '@angular/material/card', '@angular/material/checkbox', '@angular/material/chips', '@angular/material/core', '@angular/material/datepicker', '@angular/material/expansion', '@angular/material/icon', '@angular/material/input', '@angular/material/radio', '@angular/material/select', '@angular/material/slide-toggle', '@angular/material/slider', '@angular/material/stepper', '@angular/material/tabs', '@angular/material/tooltip', '@angular/material/menu', '@angular/material/toolbar', '@angular/flex-layout/core', '@angular/material-moment-adapter', 'ngx-material-file-input'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.ajsf = global.ajsf || {}, global.ajsf.material = {}), global.ng.core, global['@ajsf/core'], global.rxjs, global.ng.material.formField, global.moment, global['lodash-es'], global.ng.common, global.ng.forms, global.ng.flexLayout, global.ng.material.autocomplete, global.ng.material.button, global.ng.material.buttonToggle, global.ng.material.card, global.ng.material.checkbox, global.ng.material.chips, global.ng.material.core, global.ng.material.datepicker, global.ng.material.expansion, global.ng.material.icon, global.ng.material.input, global.ng.material.radio, global.ng.material.select, global.ng.material.slideToggle, global.ng.material.slider, global.ng.material.stepper, global.ng.material.tabs, global.ng.material.tooltip, global.ng.material.menu, global.ng.material.toolbar, global.ng.flexLayout.core, global.ng.materialMomentAdapter, global.ngxMaterialFileInput));
+}(this, (function (exports, core, core$1, rxjs, formField, moment, cloneDeep, common, forms, flexLayout, autocomplete, button, buttonToggle, card, checkbox, chips, core$3, datepicker, expansion, icon, input, radio, select, slideToggle, slider, stepper, tabs, tooltip, menu, toolbar, core$2, materialMomentAdapter, ngxMaterialFileInput) { 'use strict';
 
     function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
     function _interopNamespace(e) {
-        if (e && e.__esModule) { return e; } else {
-            var n = Object.create(null);
-            if (e) {
-                Object.keys(e).forEach(function (k) {
-                    if (k !== 'default') {
-                        var d = Object.getOwnPropertyDescriptor(e, k);
-                        Object.defineProperty(n, k, d.get ? d : {
-                            enumerable: true,
-                            get: function () {
-                                return e[k];
-                            }
-                        });
-                    }
-                });
-            }
-            n['default'] = e;
-            return Object.freeze(n);
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () {
+                            return e[k];
+                        }
+                    });
+                }
+            });
         }
+        n['default'] = e;
+        return Object.freeze(n);
     }
 
     var moment__namespace = /*#__PURE__*/_interopNamespace(moment);
@@ -256,10 +255,16 @@
                 r[k] = a[j];
         return r;
     }
-    function __spreadArray(to, from) {
-        for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-            to[j] = from[i];
-        return to;
+    function __spreadArray(to, from, pack) {
+        if (pack || arguments.length === 2)
+            for (var i = 0, l = from.length, ar; i < l; i++) {
+                if (ar || !(i in from)) {
+                    if (!ar)
+                        ar = Array.prototype.slice.call(from, 0, i);
+                    ar[i] = from[i];
+                }
+            }
+        return to.concat(ar || from);
     }
     function __await(v) {
         return this instanceof __await ? (this.v = v, this) : new __await(v);
@@ -325,18 +330,21 @@
     function __importDefault(mod) {
         return (mod && mod.__esModule) ? mod : { default: mod };
     }
-    function __classPrivateFieldGet(receiver, privateMap) {
-        if (!privateMap.has(receiver)) {
-            throw new TypeError("attempted to get private field on non-instance");
-        }
-        return privateMap.get(receiver);
+    function __classPrivateFieldGet(receiver, state, kind, f) {
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a getter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot read private member from an object whose class did not declare it");
+        return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
     }
-    function __classPrivateFieldSet(receiver, privateMap, value) {
-        if (!privateMap.has(receiver)) {
-            throw new TypeError("attempted to set private field on non-instance");
-        }
-        privateMap.set(receiver, value);
-        return value;
+    function __classPrivateFieldSet(receiver, state, value, kind, f) {
+        if (kind === "m")
+            throw new TypeError("Private method is not writable");
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a setter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot write private member to an object whose class did not declare it");
+        return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
     }
 
     var FlexLayoutRootComponent = /** @class */ (function () {
@@ -767,9 +775,8 @@
     };
 
     var MaterialDatepickerComponent = /** @class */ (function () {
-        function MaterialDatepickerComponent(matFormFieldDefaultOptions, matLabelGlobalOptions, jsf) {
+        function MaterialDatepickerComponent(matFormFieldDefaultOptions, jsf) {
             this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
-            this.matLabelGlobalOptions = matLabelGlobalOptions;
             this.jsf = jsf;
             this.controlDisabled = false;
             this.boundControl = false;
@@ -797,13 +804,12 @@
         { type: core.Component, args: [{
                     // tslint:disable-next-line:component-selector
                     selector: 'material-datepicker-widget',
-                    template: "\n    <mat-form-field [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n                    [class]=\"options?.htmlClass || ''\"\n                    [floatLabel]=\"options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')\"\n                    [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n                    [style.width]=\"'100%'\">\n      <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n        <input matInput *ngIf=\"boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [id]=\"'control' + layoutNode?._id\"\n        [max]=\"options?.maximum\"\n        [matDatepicker]=\"picker\"\n        [min]=\"options?.minimum\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.title\"\n        [readonly]=\"true\"\n        [required]=\"options?.required\"\n        [value]=\"dateValueStr\"\n        [style.width]=\"'100%'\"\n        (blur)=\"options.showErrors = true\"\n        [tabindex]=\"options?.tabindex ? options?.tabindex : 0\"\n        (dateChange)=\"updateValue($event)\"\n        (dateInput)=\"updateValue($event)\"\n        [style.cursor]=\"'default'\">\n      <input matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [disabled]=\"controlDisabled || options?.readonly\"\n        [id]=\"'control' + layoutNode?._id\"\n        [max]=\"options?.maximum\"\n        [matDatepicker]=\"picker\"\n        [min]=\"options?.minimum\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [readonly]=\"options?.readonly\"\n        [tabindex]=\"options?.tabindex ? options?.tabindex : 0\"\n        (blur)=\"options.showErrors = true\"\n        (dateChange)=\"updateValue($event)\"\n        (dateInput)=\"updateValue($event)\">\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n      <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n    </mat-form-field>\n    <mat-datepicker #picker ></mat-datepicker>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                    template: "\n    <mat-form-field [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n                    [class]=\"options?.htmlClass || ''\"\n                    [floatLabel]=\"options?.floatLabel || matFormFieldDefaultOptions?.floatLabel || (options?.notitle ? 'never' : 'auto')\"\n                    [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n                    [style.width]=\"'100%'\">\n      <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n        <input matInput *ngIf=\"boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [id]=\"'control' + layoutNode?._id\"\n        [max]=\"options?.maximum\"\n        [matDatepicker]=\"picker\"\n        [min]=\"options?.minimum\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.title\"\n        [readonly]=\"true\"\n        [required]=\"options?.required\"\n        [value]=\"dateValueStr\"\n        [style.width]=\"'100%'\"\n        (blur)=\"options.showErrors = true\"\n        [tabindex]=\"options?.tabindex ? options?.tabindex : 0\"\n        (dateChange)=\"updateValue($event)\"\n        (dateInput)=\"updateValue($event)\"\n        [style.cursor]=\"'default'\">\n      <input matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.readonly]=\"options?.readonly ? 'readonly' : null\"\n        [disabled]=\"controlDisabled || options?.readonly\"\n        [id]=\"'control' + layoutNode?._id\"\n        [max]=\"options?.maximum\"\n        [matDatepicker]=\"picker\"\n        [min]=\"options?.minimum\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [readonly]=\"options?.readonly\"\n        [tabindex]=\"options?.tabindex ? options?.tabindex : 0\"\n        (blur)=\"options.showErrors = true\"\n        (dateChange)=\"updateValue($event)\"\n        (dateInput)=\"updateValue($event)\">\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n      <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n    </mat-form-field>\n    <mat-datepicker #picker ></mat-datepicker>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
                     styles: ["\n    mat-error { font-size: 75%; margin-top: -1rem; margin-bottom: 0.5rem; }\n    ::ng-deep json-schema-form mat-form-field .mat-form-field-wrapper .mat-form-field-flex\n      .mat-form-field-infix { width: initial; }\n  "]
                 },] }
     ];
     MaterialDatepickerComponent.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: core.Inject, args: [formField.MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: core.Optional }] },
-        { type: undefined, decorators: [{ type: core.Inject, args: [core$2.MAT_LABEL_GLOBAL_OPTIONS,] }, { type: core.Optional }] },
         { type: core$1.JsonSchemaFormService }
     ]; };
     MaterialDatepickerComponent.propDecorators = {
@@ -902,7 +908,7 @@
                     // tslint:disable-next-line:component-selector
                     selector: 'material-design-framework',
                     template: "<div\n  [class.array-item]=\"widgetLayoutNode?.arrayItem && widgetLayoutNode?.type !== '$ref'\"\n  [orderable]=\"isOrderable\"\n  [dataIndex]=\"dataIndex\"\n  [layoutIndex]=\"layoutIndex\"\n  [layoutNode]=\"widgetLayoutNode\">\n  <svg *ngIf=\"showRemoveButton\"\n       xmlns=\"http://www.w3.org/2000/svg\"\n       height=\"18\" width=\"18\" viewBox=\"0 0 24 24\"\n       class=\"close-button\"\n       (click)=\"removeItem()\">\n    <path\n      d=\"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z\"/>\n  </svg>\n  <select-widget-widget\n    [dataIndex]=\"dataIndex\"\n    [layoutIndex]=\"layoutIndex\"\n    [parent]=\"parent\"\n    [layoutNode]=\"widgetLayoutNode\"></select-widget-widget>\n</div>\n<div class=\"spacer\" *ngIf=\"widgetLayoutNode?.arrayItem && widgetLayoutNode?.type !== '$ref'\"></div>\n",
-                    styles: [".array-item{border-radius:2px;box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);padding:6px;position:relative;transition:all .28s cubic-bezier(.4,0,.2,1)}.close-button{cursor:pointer;fill:rgba(0,0,0,.4);position:absolute;right:6px;top:6px;visibility:hidden;z-index:500}.close-button:hover{fill:rgba(0,0,0,.8)}.array-item:hover>.close-button{visibility:visible}.spacer{margin:6px 0}[draggable=true]:hover{box-shadow:0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);cursor:move;z-index:10}[draggable=true].drag-target-top{box-shadow:0 -2px 0 #000;position:relative;z-index:20}[draggable=true].drag-target-bottom{box-shadow:0 2px 0 #000;position:relative;z-index:20}"]
+                    styles: [".array-item{border-radius:2px;box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);padding:6px;position:relative;transition:all .28s cubic-bezier(.4,0,.2,1)}.close-button{cursor:pointer;position:absolute;top:6px;right:6px;fill:rgba(0,0,0,.4);visibility:hidden;z-index:500}.close-button:hover{fill:rgba(0,0,0,.8)}.array-item:hover>.close-button{visibility:visible}.spacer{margin:6px 0}[draggable=true]:hover{box-shadow:0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);cursor:move;z-index:10}[draggable=true].drag-target-top{box-shadow:0 -2px 0 #000;position:relative;z-index:20}[draggable=true].drag-target-bottom{box-shadow:0 2px 0 #000;position:relative;z-index:20}"]
                 },] }
     ];
     MaterialDesignFrameworkComponent.ctorParameters = function () { return [
@@ -924,10 +930,9 @@
     }); };
     var ɵ0 = toBase64;
     var MaterialFileComponent = /** @class */ (function () {
-        function MaterialFileComponent(jsf, matFormFieldDefaultOptions, matLabelGlobalOptions) {
+        function MaterialFileComponent(jsf, matFormFieldDefaultOptions) {
             this.jsf = jsf;
             this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
-            this.matLabelGlobalOptions = matLabelGlobalOptions;
             this.controlDisabled = false;
             this.boundControl = false;
         }
@@ -963,14 +968,13 @@
         { type: core.Component, args: [{
                     // tslint:disable-next-line:component-selector
                     selector: 'material-file-widget',
-                    template: "<mat-form-field [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n                    [class]=\"options?.htmlClass || ''\"\n                    [floatLabel]=\"options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')\"\n                    [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n                    [style.width]=\"'100%'\">\n      <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <ngx-mat-file-input [tabindex]=\"options?.tabindex ? options?.tabindex : 0\" #fileInput (change)=\"updateValue($event);options.showErrors = true\" [required]=\"options?.required\" (blur)=\"options.showErrors = true\"\n        >\n      </ngx-mat-file-input>\n      <button mat-icon-button matSuffix *ngIf=\"!fileInput.empty\" (click)=\"fileInput.clear($event);updateValue($event)\" style='cursor:pointer;'>\n        <mat-icon>clear</mat-icon>\n      </button>\n      <mat-icon matSuffix *ngIf=\"fileInput.empty\" style='cursor:pointer'>folder</mat-icon>\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n    </mat-form-field>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                    template: "<mat-form-field [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n                    [class]=\"options?.htmlClass || ''\"\n                    [floatLabel]=\"options?.floatLabel || matFormFieldDefaultOptions?.floatLabel || (options?.notitle ? 'never' : 'auto')\"\n                    [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n                    [style.width]=\"'100%'\">\n      <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <ngx-mat-file-input [tabindex]=\"options?.tabindex ? options?.tabindex : 0\" #fileInput (change)=\"updateValue($event);options.showErrors = true\" [required]=\"options?.required\" (blur)=\"options.showErrors = true\"\n        >\n      </ngx-mat-file-input>\n      <button mat-icon-button matSuffix *ngIf=\"!fileInput.empty\" (click)=\"fileInput.clear($event);updateValue($event)\" style='cursor:pointer;'>\n        <mat-icon>clear</mat-icon>\n      </button>\n      <mat-icon matSuffix *ngIf=\"fileInput.empty\" style='cursor:pointer'>folder</mat-icon>\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n    </mat-form-field>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
                     styles: ["\n    mat-error { font-size: 75%; margin-top: -1rem; margin-bottom: 0.5rem; }\n    ::ng-deep json-schema-form mat-form-field .mat-form-field-wrapper .mat-form-field-flex\n      .mat-form-field-infix { width: initial; }\n  "]
                 },] }
     ];
     MaterialFileComponent.ctorParameters = function () { return [
         { type: core$1.JsonSchemaFormService },
-        { type: undefined, decorators: [{ type: core.Inject, args: [formField.MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: core.Optional }] },
-        { type: undefined, decorators: [{ type: core.Inject, args: [core$2.MAT_LABEL_GLOBAL_OPTIONS,] }, { type: core.Optional }] }
+        { type: undefined, decorators: [{ type: core.Inject, args: [formField.MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: core.Optional }] }
     ]; };
     MaterialFileComponent.propDecorators = {
         layoutNode: [{ type: core.Input }],
@@ -980,9 +984,8 @@
     };
 
     var MaterialInputComponent = /** @class */ (function () {
-        function MaterialInputComponent(matFormFieldDefaultOptions, matLabelGlobalOptions, jsf) {
+        function MaterialInputComponent(matFormFieldDefaultOptions, jsf) {
             this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
-            this.matLabelGlobalOptions = matLabelGlobalOptions;
             this.jsf = jsf;
             this.controlDisabled = false;
             this.boundControl = false;
@@ -1004,13 +1007,12 @@
         { type: core.Component, args: [{
                     // tslint:disable-next-line:component-selector
                     selector: 'material-input-widget',
-                    template: "\n    <mat-form-field [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n      [class]=\"options?.htmlClass || ''\"\n      [floatLabel]=\"options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')\"\n      [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n      [style.width]=\"'100%'\">\n      <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <input matInput *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.maxlength]=\"options?.maxLength\"\n        [attr.minlength]=\"options?.minLength\"\n        [attr.pattern]=\"options?.pattern\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [type]=\"layoutNode?.type\"\n        [tabindex]=\"options?.tabindex ? options?.tabindex : 0\"\n        (blur)=\"options.showErrors = true\">\n      <input matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.maxlength]=\"options?.maxLength\"\n        [attr.minlength]=\"options?.minLength\"\n        [attr.pattern]=\"options?.pattern\"\n        [disabled]=\"controlDisabled\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [type]=\"layoutNode?.type\"\n        [value]=\"controlValue\"\n        [tabindex]=\"options?.tabindex ? options?.tabindex : 0\"\n        (input)=\"updateValue($event)\"\n        (blur)=\"options.showErrors = true\">\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n      <mat-autocomplete *ngIf=\"options?.typeahead?.source\">\n        <mat-option *ngFor=\"let word of options?.typeahead?.source\"\n          [value]=\"word\">{{word}}</mat-option>\n      </mat-autocomplete>\n    </mat-form-field>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                    template: "\n    <mat-form-field [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n      [class]=\"options?.htmlClass || ''\"\n      [floatLabel]=\"options?.floatLabel || matFormFieldDefaultOptions?.floatLabel || (options?.notitle ? 'never' : 'auto')\"\n      [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n      [style.width]=\"'100%'\">\n      <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <input matInput *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.maxlength]=\"options?.maxLength\"\n        [attr.minlength]=\"options?.minLength\"\n        [attr.pattern]=\"options?.pattern\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [type]=\"layoutNode?.type\"\n        [tabindex]=\"options?.tabindex ? options?.tabindex : 0\"\n        (blur)=\"options.showErrors = true\">\n      <input matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.maxlength]=\"options?.maxLength\"\n        [attr.minlength]=\"options?.minLength\"\n        [attr.pattern]=\"options?.pattern\"\n        [disabled]=\"controlDisabled\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [type]=\"layoutNode?.type\"\n        [value]=\"controlValue\"\n        [tabindex]=\"options?.tabindex ? options?.tabindex : 0\"\n        (input)=\"updateValue($event)\"\n        (blur)=\"options.showErrors = true\">\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n      <mat-autocomplete *ngIf=\"options?.typeahead?.source\">\n        <mat-option *ngFor=\"let word of options?.typeahead?.source\"\n          [value]=\"word\">{{word}}</mat-option>\n      </mat-autocomplete>\n    </mat-form-field>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
                     styles: ["\n    mat-error { font-size: 75%; margin-top: -1rem; margin-bottom: 0.5rem; }\n    ::ng-deep json-schema-form mat-form-field .mat-form-field-wrapper .mat-form-field-flex\n      .mat-form-field-infix { width: initial; }\n  "]
                 },] }
     ];
     MaterialInputComponent.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: core.Inject, args: [formField.MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: core.Optional }] },
-        { type: undefined, decorators: [{ type: core.Inject, args: [core$2.MAT_LABEL_GLOBAL_OPTIONS,] }, { type: core.Optional }] },
         { type: core$1.JsonSchemaFormService }
     ]; };
     MaterialInputComponent.propDecorators = {
@@ -1020,9 +1022,8 @@
     };
 
     var MaterialNumberComponent = /** @class */ (function () {
-        function MaterialNumberComponent(matFormFieldDefaultOptions, matLabelGlobalOptions, jsf) {
+        function MaterialNumberComponent(matFormFieldDefaultOptions, jsf) {
             this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
-            this.matLabelGlobalOptions = matLabelGlobalOptions;
             this.jsf = jsf;
             this.controlDisabled = false;
             this.boundControl = false;
@@ -1050,13 +1051,12 @@
         { type: core.Component, args: [{
                     // tslint:disable-next-line:component-selector
                     selector: 'material-number-widget',
-                    template: "\n    <mat-form-field [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n    [class]=\"options?.htmlClass || ''\"\n    [floatLabel]=\"options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')\"\n    [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n    [style.width]=\"'100%'\">\n    <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <input matInput *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.max]=\"options?.maximum\"\n        [attr.min]=\"options?.minimum\"\n        [attr.step]=\"options?.multipleOf || options?.step || 'any'\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [type]=\"'number'\"\n        (blur)=\"options.showErrors = true\">\n      <input matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.max]=\"options?.maximum\"\n        [attr.min]=\"options?.minimum\"\n        [attr.step]=\"options?.multipleOf || options?.step || 'any'\"\n        [disabled]=\"controlDisabled\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [type]=\"'number'\"\n        [value]=\"controlValue\"\n        (input)=\"updateValue($event)\"\n        (blur)=\"options.showErrors = true\">\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"layoutNode?.type === 'range'\" align=\"start\"\n        [innerHTML]=\"controlValue\"></mat-hint>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n    </mat-form-field>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                    template: "\n    <mat-form-field [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n    [class]=\"options?.htmlClass || ''\"\n    [floatLabel]=\"options?.floatLabel || matFormFieldDefaultOptions?.floatLabel || (options?.notitle ? 'never' : 'auto')\"\n    [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n    [style.width]=\"'100%'\">\n    <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <input matInput *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.max]=\"options?.maximum\"\n        [attr.min]=\"options?.minimum\"\n        [attr.step]=\"options?.multipleOf || options?.step || 'any'\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [type]=\"'number'\"\n        (blur)=\"options.showErrors = true\">\n      <input matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.max]=\"options?.maximum\"\n        [attr.min]=\"options?.minimum\"\n        [attr.step]=\"options?.multipleOf || options?.step || 'any'\"\n        [disabled]=\"controlDisabled\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [type]=\"'number'\"\n        [value]=\"controlValue\"\n        (input)=\"updateValue($event)\"\n        (blur)=\"options.showErrors = true\">\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"layoutNode?.type === 'range'\" align=\"start\"\n        [innerHTML]=\"controlValue\"></mat-hint>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n    </mat-form-field>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
                     styles: ["\n    mat-error { font-size: 75%; margin-top: -1rem; margin-bottom: 0.5rem; }\n    ::ng-deep json-schema-form mat-form-field .mat-form-field-wrapper .mat-form-field-flex\n      .mat-form-field-infix { width: initial; }\n  "]
                 },] }
     ];
     MaterialNumberComponent.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: core.Inject, args: [formField.MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: core.Optional }] },
-        { type: undefined, decorators: [{ type: core.Inject, args: [core$2.MAT_LABEL_GLOBAL_OPTIONS,] }, { type: core.Optional }] },
         { type: core$1.JsonSchemaFormService }
     ]; };
     MaterialNumberComponent.propDecorators = {
@@ -1137,9 +1137,8 @@
     };
 
     var MaterialSelectComponent = /** @class */ (function () {
-        function MaterialSelectComponent(matFormFieldDefaultOptions, matLabelGlobalOptions, jsf, cdf) {
+        function MaterialSelectComponent(matFormFieldDefaultOptions, jsf, cdf) {
             this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
-            this.matLabelGlobalOptions = matLabelGlobalOptions;
             this.jsf = jsf;
             this.cdf = cdf;
             this.controlDisabled = false;
@@ -1171,13 +1170,12 @@
         { type: core.Component, args: [{
                     // tslint:disable-next-line:component-selector
                     selector: 'material-select-widget',
-                    template: "\n    <mat-form-field\n      [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n      [class]=\"options?.htmlClass || ''\"\n      [floatLabel]=\"options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')\"\n      [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n      [style.width]=\"'100%'\">\n      <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <mat-select *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.name]=\"controlName\"\n        [id]=\"'control' + layoutNode?._id\"\n        [multiple]=\"options?.multiple\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [tabIndex]=\"options?.tabindex ? options?.tabindex : 0\"\n        (blur)=\"options.showErrors = true\">\n        <ng-template ngFor let-selectItem [ngForOf]=\"selectList\">\n          <mat-option *ngIf=\"!isArray(selectItem?.items)\"\n            [value]=\"selectItem?.value\">\n            <span [innerHTML]=\"selectItem?.name\"></span>\n          </mat-option>\n          <mat-optgroup *ngIf=\"isArray(selectItem?.items)\"\n            [label]=\"selectItem?.group\">\n            <mat-option *ngFor=\"let subItem of selectItem.items\"\n              [value]=\"subItem?.value\">\n              <span [innerHTML]=\"subItem?.name\"></span>\n            </mat-option>\n          </mat-optgroup>\n        </ng-template>\n      </mat-select>\n      <mat-select *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.name]=\"controlName\"\n        [disabled]=\"controlDisabled || options?.readonly\"\n        [id]=\"'control' + layoutNode?._id\"\n        [multiple]=\"options?.multiple\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [value]=\"controlValue\"\n        [tabIndex]=\"options?.tabindex ? options?.tabindex : 0\"\n        (blur)=\"options.showErrors = true\"\n        (change)=\"updateValue($event)\">\n        <ng-template ngFor let-selectItem [ngForOf]=\"selectList\">\n          <mat-option *ngIf=\"!isArray(selectItem?.items)\"\n            [attr.selected]=\"selectItem?.value === controlValue\"\n            [value]=\"selectItem?.value\">\n            <span [innerHTML]=\"selectItem?.name\"></span>\n          </mat-option>\n          <mat-optgroup *ngIf=\"isArray(selectItem?.items)\"\n            [label]=\"selectItem?.group\">\n            <mat-option *ngFor=\"let subItem of selectItem.items\"\n              [attr.selected]=\"subItem?.value === controlValue\"\n              [value]=\"subItem?.value\">\n              <span [innerHTML]=\"subItem?.name\"></span>\n            </mat-option>\n          </mat-optgroup>\n        </ng-template>\n      </mat-select>\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n    </mat-form-field>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                    template: "\n    <mat-form-field\n      [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n      [class]=\"options?.htmlClass || ''\"\n      [floatLabel]=\"options?.floatLabel || matFormFieldDefaultOptions?.floatLabel || (options?.notitle ? 'never' : 'auto')\"\n      [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n      [style.width]=\"'100%'\">\n      <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <mat-select *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.name]=\"controlName\"\n        [id]=\"'control' + layoutNode?._id\"\n        [multiple]=\"options?.multiple\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [tabIndex]=\"options?.tabindex ? options?.tabindex : 0\"\n        (blur)=\"options.showErrors = true\">\n        <ng-template ngFor let-selectItem [ngForOf]=\"selectList\">\n          <mat-option *ngIf=\"!isArray(selectItem?.items)\"\n            [value]=\"selectItem?.value\">\n            <span [innerHTML]=\"selectItem?.name\"></span>\n          </mat-option>\n          <mat-optgroup *ngIf=\"isArray(selectItem?.items)\"\n            [label]=\"selectItem?.group\">\n            <mat-option *ngFor=\"let subItem of selectItem.items\"\n              [value]=\"subItem?.value\">\n              <span [innerHTML]=\"subItem?.name\"></span>\n            </mat-option>\n          </mat-optgroup>\n        </ng-template>\n      </mat-select>\n      <mat-select *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.name]=\"controlName\"\n        [disabled]=\"controlDisabled || options?.readonly\"\n        [id]=\"'control' + layoutNode?._id\"\n        [multiple]=\"options?.multiple\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [required]=\"options?.required\"\n        [style.width]=\"'100%'\"\n        [value]=\"controlValue\"\n        [tabIndex]=\"options?.tabindex ? options?.tabindex : 0\"\n        (blur)=\"options.showErrors = true\"\n        (change)=\"updateValue($event)\">\n        <ng-template ngFor let-selectItem [ngForOf]=\"selectList\">\n          <mat-option *ngIf=\"!isArray(selectItem?.items)\"\n            [attr.selected]=\"selectItem?.value === controlValue\"\n            [value]=\"selectItem?.value\">\n            <span [innerHTML]=\"selectItem?.name\"></span>\n          </mat-option>\n          <mat-optgroup *ngIf=\"isArray(selectItem?.items)\"\n            [label]=\"selectItem?.group\">\n            <mat-option *ngFor=\"let subItem of selectItem.items\"\n              [attr.selected]=\"subItem?.value === controlValue\"\n              [value]=\"subItem?.value\">\n              <span [innerHTML]=\"subItem?.name\"></span>\n            </mat-option>\n          </mat-optgroup>\n        </ng-template>\n      </mat-select>\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n    </mat-form-field>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
                     styles: ["\n    mat-error { font-size: 75%; margin-top: -1rem; margin-bottom: 0.5rem; }\n    ::ng-deep json-schema-form mat-form-field .mat-form-field-wrapper .mat-form-field-flex\n      .mat-form-field-infix { width: initial; }\n  "]
                 },] }
     ];
     MaterialSelectComponent.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: core.Inject, args: [formField.MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: core.Optional }] },
-        { type: undefined, decorators: [{ type: core.Inject, args: [core$2.MAT_LABEL_GLOBAL_OPTIONS,] }, { type: core.Optional }] },
         { type: core$1.JsonSchemaFormService },
         { type: core.ChangeDetectorRef }
     ]; };
@@ -1308,9 +1306,8 @@
     };
 
     var MaterialTextareaComponent = /** @class */ (function () {
-        function MaterialTextareaComponent(matFormFieldDefaultOptions, matLabelGlobalOptions, jsf) {
+        function MaterialTextareaComponent(matFormFieldDefaultOptions, jsf) {
             this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
-            this.matLabelGlobalOptions = matLabelGlobalOptions;
             this.jsf = jsf;
             this.controlDisabled = false;
             this.boundControl = false;
@@ -1331,13 +1328,12 @@
         { type: core.Component, args: [{
                     // tslint:disable-next-line:component-selector
                     selector: 'material-textarea-widget',
-                    template: "\n    <mat-form-field [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n      [class]=\"options?.htmlClass || ''\"\n      [floatLabel]=\"options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')\"\n      [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n      [style.width]=\"'100%'\">\n      <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <textarea matInput *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.maxlength]=\"options?.maxLength\"\n        [attr.minlength]=\"options?.minLength\"\n        [attr.pattern]=\"options?.pattern\"\n        [required]=\"options?.required\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [style.width]=\"'100%'\"\n        (blur)=\"options.showErrors = true\"></textarea>\n      <textarea matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.maxlength]=\"options?.maxLength\"\n        [attr.minlength]=\"options?.minLength\"\n        [attr.pattern]=\"options?.pattern\"\n        [required]=\"options?.required\"\n        [disabled]=\"controlDisabled\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [style.width]=\"'100%'\"\n        [value]=\"controlValue\"\n        (input)=\"updateValue($event)\"\n        (blur)=\"options.showErrors = true\"></textarea>\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n    </mat-form-field>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
+                    template: "\n    <mat-form-field [appearance]=\"options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'\"\n      [class]=\"options?.htmlClass || ''\"\n      [floatLabel]=\"options?.floatLabel || matFormFieldDefaultOptions?.floatLabel || (options?.notitle ? 'never' : 'auto')\"\n      [hideRequiredMarker]=\"options?.hideRequired ? 'true' : 'false'\"\n      [style.width]=\"'100%'\">\n      <mat-label *ngIf=\"!options?.notitle\">{{options?.title}}</mat-label>\n      <span matPrefix *ngIf=\"options?.prefix || options?.fieldAddonLeft\"\n        [innerHTML]=\"options?.prefix || options?.fieldAddonLeft\"></span>\n      <textarea matInput *ngIf=\"boundControl\"\n        [formControl]=\"formControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.maxlength]=\"options?.maxLength\"\n        [attr.minlength]=\"options?.minLength\"\n        [attr.pattern]=\"options?.pattern\"\n        [required]=\"options?.required\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [style.width]=\"'100%'\"\n        (blur)=\"options.showErrors = true\"></textarea>\n      <textarea matInput *ngIf=\"!boundControl\"\n        [attr.aria-describedby]=\"'control' + layoutNode?._id + 'Status'\"\n        [attr.list]=\"'control' + layoutNode?._id + 'Autocomplete'\"\n        [attr.maxlength]=\"options?.maxLength\"\n        [attr.minlength]=\"options?.minLength\"\n        [attr.pattern]=\"options?.pattern\"\n        [required]=\"options?.required\"\n        [disabled]=\"controlDisabled\"\n        [id]=\"'control' + layoutNode?._id\"\n        [name]=\"controlName\"\n        [placeholder]=\"options?.notitle ? options?.placeholder : options?.title\"\n        [readonly]=\"options?.readonly ? 'readonly' : null\"\n        [style.width]=\"'100%'\"\n        [value]=\"controlValue\"\n        (input)=\"updateValue($event)\"\n        (blur)=\"options.showErrors = true\"></textarea>\n      <span matSuffix *ngIf=\"options?.suffix || options?.fieldAddonRight\"\n        [innerHTML]=\"options?.suffix || options?.fieldAddonRight\"></span>\n      <mat-hint *ngIf=\"options?.description && (!options?.showErrors || !options?.errorMessage)\"\n        align=\"end\" [innerHTML]=\"options?.description\"></mat-hint>\n    </mat-form-field>\n    <mat-error *ngIf=\"options?.showErrors && options?.errorMessage\"\n      [innerHTML]=\"options?.errorMessage\"></mat-error>",
                     styles: ["\n    mat-error { font-size: 75%; margin-top: -1rem; margin-bottom: 0.5rem; }\n    ::ng-deep json-schema-form mat-form-field .mat-form-field-wrapper .mat-form-field-flex\n      .mat-form-field-infix { width: initial; }\n  "]
                 },] }
     ];
     MaterialTextareaComponent.ctorParameters = function () { return [
         { type: undefined, decorators: [{ type: core.Inject, args: [formField.MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: core.Optional }] },
-        { type: undefined, decorators: [{ type: core.Inject, args: [core$2.MAT_LABEL_GLOBAL_OPTIONS,] }, { type: core.Optional }] },
         { type: core$1.JsonSchemaFormService }
     ]; };
     MaterialTextareaComponent.propDecorators = {
@@ -1414,8 +1410,8 @@
 
     function fixAngularFlex() {
         // monkey patch based on errors in console  - https://github.com/angular/flex-layout/issues/1011
-        var MediaMarshallerUpdateElement = core$3.MediaMarshaller.prototype.updateElement;
-        core$3.MediaMarshaller.prototype.updateElement = function (element, key, value) {
+        var MediaMarshallerUpdateElement = core$2.MediaMarshaller.prototype.updateElement;
+        core$2.MediaMarshaller.prototype.updateElement = function (element, key, value) {
             if (key === 'layout-gap' && (value === null || value === undefined)) {
                 value = '0px';
             }
@@ -1450,7 +1446,7 @@
         { type: core.Injectable }
     ];
     MomentUtcDateAdapter.ctorParameters = function () { return [
-        { type: String, decorators: [{ type: core.Optional }, { type: core.Inject, args: [core$2.MAT_DATE_LOCALE,] }] }
+        { type: String, decorators: [{ type: core.Optional }, { type: core.Inject, args: [core$3.MAT_DATE_LOCALE,] }] }
     ]; };
 
     /**
@@ -1463,7 +1459,7 @@
     var ANGULAR_MATERIAL_MODULES = [
         autocomplete.MatAutocompleteModule, button.MatButtonModule, buttonToggle.MatButtonToggleModule, card.MatCardModule,
         checkbox.MatCheckboxModule, chips.MatChipsModule, datepicker.MatDatepickerModule, expansion.MatExpansionModule,
-        formField.MatFormFieldModule, icon.MatIconModule, input.MatInputModule, core$2.MatNativeDateModule,
+        formField.MatFormFieldModule, icon.MatIconModule, input.MatInputModule, core$3.MatNativeDateModule,
         radio.MatRadioModule, select.MatSelectModule, slider.MatSliderModule, slideToggle.MatSlideToggleModule,
         stepper.MatStepperModule, tabs.MatTabsModule, tooltip.MatTooltipModule,
         toolbar.MatToolbarModule, menu.MatMenuModule, toolbar.MatToolbarModule,
@@ -1496,7 +1492,7 @@
                         core$1.FrameworkLibraryService,
                         core$1.WidgetLibraryService,
                         { provide: core$1.Framework, useClass: MaterialDesignFramework, multi: true },
-                        { provide: core$2.DateAdapter, useClass: MomentUtcDateAdapter }
+                        { provide: core$3.DateAdapter, useClass: MomentUtcDateAdapter }
                     ],
                     entryComponents: __spread(MATERIAL_FRAMEWORK_COMPONENTS)
                 },] }

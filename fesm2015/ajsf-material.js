@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Inject, Optional, ChangeDetectorRef, ViewChild, Injectable, NgModule } from '@angular/core';
 import { JsonSchemaFormService, hasOwn, buildTitleMap, isDefined, isArray, Framework, WidgetLibraryModule, JsonSchemaFormModule, FrameworkLibraryService, WidgetLibraryService } from '@ajsf/core';
 import { Subscription } from 'rxjs';
-import { MAT_LABEL_GLOBAL_OPTIONS, MAT_DATE_LOCALE, MatNativeDateModule, DateAdapter } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
 import * as moment from 'moment';
 import { utc } from 'moment';
@@ -16,6 +15,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
+import { MAT_DATE_LOCALE, MatNativeDateModule, DateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
@@ -719,9 +719,8 @@ MaterialChipListComponent.propDecorators = {
 };
 
 class MaterialDatepickerComponent {
-    constructor(matFormFieldDefaultOptions, matLabelGlobalOptions, jsf) {
+    constructor(matFormFieldDefaultOptions, jsf) {
         this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
-        this.matLabelGlobalOptions = matLabelGlobalOptions;
         this.jsf = jsf;
         this.controlDisabled = false;
         this.boundControl = false;
@@ -751,7 +750,7 @@ MaterialDatepickerComponent.decorators = [
                 template: `
     <mat-form-field [appearance]="options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'"
                     [class]="options?.htmlClass || ''"
-                    [floatLabel]="options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')"
+                    [floatLabel]="options?.floatLabel || matFormFieldDefaultOptions?.floatLabel || (options?.notitle ? 'never' : 'auto')"
                     [hideRequiredMarker]="options?.hideRequired ? 'true' : 'false'"
                     [style.width]="'100%'">
       <mat-label *ngIf="!options?.notitle">{{options?.title}}</mat-label>
@@ -812,7 +811,6 @@ MaterialDatepickerComponent.decorators = [
 ];
 MaterialDatepickerComponent.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: Optional }] },
-    { type: undefined, decorators: [{ type: Inject, args: [MAT_LABEL_GLOBAL_OPTIONS,] }, { type: Optional }] },
     { type: JsonSchemaFormService }
 ];
 MaterialDatepickerComponent.propDecorators = {
@@ -906,7 +904,7 @@ MaterialDesignFrameworkComponent.decorators = [
                 // tslint:disable-next-line:component-selector
                 selector: 'material-design-framework',
                 template: "<div\n  [class.array-item]=\"widgetLayoutNode?.arrayItem && widgetLayoutNode?.type !== '$ref'\"\n  [orderable]=\"isOrderable\"\n  [dataIndex]=\"dataIndex\"\n  [layoutIndex]=\"layoutIndex\"\n  [layoutNode]=\"widgetLayoutNode\">\n  <svg *ngIf=\"showRemoveButton\"\n       xmlns=\"http://www.w3.org/2000/svg\"\n       height=\"18\" width=\"18\" viewBox=\"0 0 24 24\"\n       class=\"close-button\"\n       (click)=\"removeItem()\">\n    <path\n      d=\"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z\"/>\n  </svg>\n  <select-widget-widget\n    [dataIndex]=\"dataIndex\"\n    [layoutIndex]=\"layoutIndex\"\n    [parent]=\"parent\"\n    [layoutNode]=\"widgetLayoutNode\"></select-widget-widget>\n</div>\n<div class=\"spacer\" *ngIf=\"widgetLayoutNode?.arrayItem && widgetLayoutNode?.type !== '$ref'\"></div>\n",
-                styles: [".array-item{border-radius:2px;box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);padding:6px;position:relative;transition:all .28s cubic-bezier(.4,0,.2,1)}.close-button{cursor:pointer;fill:rgba(0,0,0,.4);position:absolute;right:6px;top:6px;visibility:hidden;z-index:500}.close-button:hover{fill:rgba(0,0,0,.8)}.array-item:hover>.close-button{visibility:visible}.spacer{margin:6px 0}[draggable=true]:hover{box-shadow:0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);cursor:move;z-index:10}[draggable=true].drag-target-top{box-shadow:0 -2px 0 #000;position:relative;z-index:20}[draggable=true].drag-target-bottom{box-shadow:0 2px 0 #000;position:relative;z-index:20}"]
+                styles: [".array-item{border-radius:2px;box-shadow:0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);padding:6px;position:relative;transition:all .28s cubic-bezier(.4,0,.2,1)}.close-button{cursor:pointer;position:absolute;top:6px;right:6px;fill:rgba(0,0,0,.4);visibility:hidden;z-index:500}.close-button:hover{fill:rgba(0,0,0,.8)}.array-item:hover>.close-button{visibility:visible}.spacer{margin:6px 0}[draggable=true]:hover{box-shadow:0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);cursor:move;z-index:10}[draggable=true].drag-target-top{box-shadow:0 -2px 0 #000;position:relative;z-index:20}[draggable=true].drag-target-bottom{box-shadow:0 2px 0 #000;position:relative;z-index:20}"]
             },] }
 ];
 MaterialDesignFrameworkComponent.ctorParameters = () => [
@@ -928,10 +926,9 @@ const toBase64 = file => new Promise((resolve, reject) => {
 });
 const ɵ0 = toBase64;
 class MaterialFileComponent {
-    constructor(jsf, matFormFieldDefaultOptions, matLabelGlobalOptions) {
+    constructor(jsf, matFormFieldDefaultOptions) {
         this.jsf = jsf;
         this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
-        this.matLabelGlobalOptions = matLabelGlobalOptions;
         this.controlDisabled = false;
         this.boundControl = false;
     }
@@ -959,7 +956,7 @@ MaterialFileComponent.decorators = [
                 selector: 'material-file-widget',
                 template: `<mat-form-field [appearance]="options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'"
                     [class]="options?.htmlClass || ''"
-                    [floatLabel]="options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')"
+                    [floatLabel]="options?.floatLabel || matFormFieldDefaultOptions?.floatLabel || (options?.notitle ? 'never' : 'auto')"
                     [hideRequiredMarker]="options?.hideRequired ? 'true' : 'false'"
                     [style.width]="'100%'">
       <mat-label *ngIf="!options?.notitle">{{options?.title}}</mat-label>
@@ -988,8 +985,7 @@ MaterialFileComponent.decorators = [
 ];
 MaterialFileComponent.ctorParameters = () => [
     { type: JsonSchemaFormService },
-    { type: undefined, decorators: [{ type: Inject, args: [MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: Optional }] },
-    { type: undefined, decorators: [{ type: Inject, args: [MAT_LABEL_GLOBAL_OPTIONS,] }, { type: Optional }] }
+    { type: undefined, decorators: [{ type: Inject, args: [MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: Optional }] }
 ];
 MaterialFileComponent.propDecorators = {
     layoutNode: [{ type: Input }],
@@ -999,9 +995,8 @@ MaterialFileComponent.propDecorators = {
 };
 
 class MaterialInputComponent {
-    constructor(matFormFieldDefaultOptions, matLabelGlobalOptions, jsf) {
+    constructor(matFormFieldDefaultOptions, jsf) {
         this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
-        this.matLabelGlobalOptions = matLabelGlobalOptions;
         this.jsf = jsf;
         this.controlDisabled = false;
         this.boundControl = false;
@@ -1025,7 +1020,7 @@ MaterialInputComponent.decorators = [
                 template: `
     <mat-form-field [appearance]="options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'"
       [class]="options?.htmlClass || ''"
-      [floatLabel]="options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')"
+      [floatLabel]="options?.floatLabel || matFormFieldDefaultOptions?.floatLabel || (options?.notitle ? 'never' : 'auto')"
       [hideRequiredMarker]="options?.hideRequired ? 'true' : 'false'"
       [style.width]="'100%'">
       <mat-label *ngIf="!options?.notitle">{{options?.title}}</mat-label>
@@ -1085,7 +1080,6 @@ MaterialInputComponent.decorators = [
 ];
 MaterialInputComponent.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: Optional }] },
-    { type: undefined, decorators: [{ type: Inject, args: [MAT_LABEL_GLOBAL_OPTIONS,] }, { type: Optional }] },
     { type: JsonSchemaFormService }
 ];
 MaterialInputComponent.propDecorators = {
@@ -1095,9 +1089,8 @@ MaterialInputComponent.propDecorators = {
 };
 
 class MaterialNumberComponent {
-    constructor(matFormFieldDefaultOptions, matLabelGlobalOptions, jsf) {
+    constructor(matFormFieldDefaultOptions, jsf) {
         this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
-        this.matLabelGlobalOptions = matLabelGlobalOptions;
         this.jsf = jsf;
         this.controlDisabled = false;
         this.boundControl = false;
@@ -1127,7 +1120,7 @@ MaterialNumberComponent.decorators = [
                 template: `
     <mat-form-field [appearance]="options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'"
     [class]="options?.htmlClass || ''"
-    [floatLabel]="options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')"
+    [floatLabel]="options?.floatLabel || matFormFieldDefaultOptions?.floatLabel || (options?.notitle ? 'never' : 'auto')"
     [hideRequiredMarker]="options?.hideRequired ? 'true' : 'false'"
     [style.width]="'100%'">
     <mat-label *ngIf="!options?.notitle">{{options?.title}}</mat-label>
@@ -1181,7 +1174,6 @@ MaterialNumberComponent.decorators = [
 ];
 MaterialNumberComponent.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: Optional }] },
-    { type: undefined, decorators: [{ type: Inject, args: [MAT_LABEL_GLOBAL_OPTIONS,] }, { type: Optional }] },
     { type: JsonSchemaFormService }
 ];
 MaterialNumberComponent.propDecorators = {
@@ -1304,9 +1296,8 @@ MaterialRadiosComponent.propDecorators = {
 };
 
 class MaterialSelectComponent {
-    constructor(matFormFieldDefaultOptions, matLabelGlobalOptions, jsf, cdf) {
+    constructor(matFormFieldDefaultOptions, jsf, cdf) {
         this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
-        this.matLabelGlobalOptions = matLabelGlobalOptions;
         this.jsf = jsf;
         this.cdf = cdf;
         this.controlDisabled = false;
@@ -1341,7 +1332,7 @@ MaterialSelectComponent.decorators = [
     <mat-form-field
       [appearance]="options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'"
       [class]="options?.htmlClass || ''"
-      [floatLabel]="options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')"
+      [floatLabel]="options?.floatLabel || matFormFieldDefaultOptions?.floatLabel || (options?.notitle ? 'never' : 'auto')"
       [hideRequiredMarker]="options?.hideRequired ? 'true' : 'false'"
       [style.width]="'100%'">
       <mat-label *ngIf="!options?.notitle">{{options?.title}}</mat-label>
@@ -1417,7 +1408,6 @@ MaterialSelectComponent.decorators = [
 ];
 MaterialSelectComponent.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: Optional }] },
-    { type: undefined, decorators: [{ type: Inject, args: [MAT_LABEL_GLOBAL_OPTIONS,] }, { type: Optional }] },
     { type: JsonSchemaFormService },
     { type: ChangeDetectorRef }
 ];
@@ -1585,9 +1575,8 @@ MaterialTabsComponent.propDecorators = {
 };
 
 class MaterialTextareaComponent {
-    constructor(matFormFieldDefaultOptions, matLabelGlobalOptions, jsf) {
+    constructor(matFormFieldDefaultOptions, jsf) {
         this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
-        this.matLabelGlobalOptions = matLabelGlobalOptions;
         this.jsf = jsf;
         this.controlDisabled = false;
         this.boundControl = false;
@@ -1610,7 +1599,7 @@ MaterialTextareaComponent.decorators = [
                 template: `
     <mat-form-field [appearance]="options?.appearance || matFormFieldDefaultOptions?.appearance || 'standard'"
       [class]="options?.htmlClass || ''"
-      [floatLabel]="options?.floatLabel || matLabelGlobalOptions?.float || (options?.notitle ? 'never' : 'auto')"
+      [floatLabel]="options?.floatLabel || matFormFieldDefaultOptions?.floatLabel || (options?.notitle ? 'never' : 'auto')"
       [hideRequiredMarker]="options?.hideRequired ? 'true' : 'false'"
       [style.width]="'100%'">
       <mat-label *ngIf="!options?.notitle">{{options?.title}}</mat-label>
@@ -1662,7 +1651,6 @@ MaterialTextareaComponent.decorators = [
 ];
 MaterialTextareaComponent.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: Optional }] },
-    { type: undefined, decorators: [{ type: Inject, args: [MAT_LABEL_GLOBAL_OPTIONS,] }, { type: Optional }] },
     { type: JsonSchemaFormService }
 ];
 MaterialTextareaComponent.propDecorators = {

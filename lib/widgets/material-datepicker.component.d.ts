@@ -4,7 +4,6 @@ import { JsonSchemaFormService } from '@ajsf/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 export declare class MaterialDatepickerComponent implements OnInit {
     matFormFieldDefaultOptions: any;
-    matLabelGlobalOptions: any;
     private jsf;
     formControl: AbstractControl;
     controlName: string;
@@ -19,7 +18,7 @@ export declare class MaterialDatepickerComponent implements OnInit {
     layoutNode: any;
     layoutIndex: number[];
     dataIndex: number[];
-    constructor(matFormFieldDefaultOptions: any, matLabelGlobalOptions: any, jsf: JsonSchemaFormService);
+    constructor(matFormFieldDefaultOptions: any, jsf: JsonSchemaFormService);
     ngOnInit(): void;
     updateValue(event: MatDatepickerInputEvent<Date>): void;
 }
