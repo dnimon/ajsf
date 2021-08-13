@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { FormControl, FormArray, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Injectable, ɵɵdefineInjectable, Component, ChangeDetectionStrategy, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef, ɵɵinject, Inject, EventEmitter, ChangeDetectorRef, Output, Directive, ElementRef, NgZone, NgModule } from '@angular/core';
+import { Injectable, EventEmitter, ɵɵdefineInjectable, Component, ChangeDetectionStrategy, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef, ɵɵinject, Inject, ChangeDetectorRef, Output, Directive, ElementRef, NgZone, NgModule } from '@angular/core';
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual$1 from 'lodash/isEqual';
 import { from, Observable, forkJoin, Subject, Subscription } from 'rxjs';
@@ -6267,6 +6267,7 @@ class JsonSchemaFormService {
         this.dataChanges = new Subject(); // Form data observable
         this.isValidChanges = new Subject(); // isValid observable
         this.validationErrorChanges = new Subject(); // validationErrors observable
+        this.keyChanges = new EventEmitter();
         this.arrayMap = new Map(); // Maps arrays in data object and number of tuple values
         this.dataMap = new Map(); // Maps paths in form data to schema and formGroup paths
         this.dataRecursiveRefMap = new Map(); // Maps recursive reference points in form data
@@ -6712,6 +6713,9 @@ class JsonSchemaFormService {
                             : // If no custom error message, return formatted error data instead
                                 addSpaces(errorKey) + ' Error: ' + formatError(errors[errorKey]))
             .join('<br>'));
+    }
+    updateKeydown(data) {
+        this.keyChanges.emit(data);
     }
     updateValue(ctx, value) {
         // Set value of current control
@@ -8458,6 +8462,7 @@ class JsonSchemaFormComponent {
         };
         // Outputs
         this.onChanges = new EventEmitter(); // Live unvalidated internal form data
+        this.onKeyChanges = new EventEmitter();
         this.onSubmit = new EventEmitter(); // Complete validated form data
         this.isValid = new EventEmitter(); // Is current data valid?
         this.validationErrors = new EventEmitter(); // Validation errors (if any)
@@ -9030,6 +9035,9 @@ class JsonSchemaFormComponent {
                     this[`${this.formValuesInput}Change`].emit(this.objectWrap ? data['1'] : data);
                 }
             }));
+            this.subscriptions.add(this.jsf.keyChanges.subscribe(data => {
+                this.onKeyChanges.emit(data);
+            }));
             // Trigger change detection on statusChanges to show updated errors
             this.subscriptions.add(this.jsf.formGroup.statusChanges.subscribe(() => this.changeDetector.markForCheck()));
             this.subscriptions.add(this.jsf.isValidChanges.subscribe(isValid => this.isValid.emit(isValid)));
@@ -9087,6 +9095,7 @@ JsonSchemaFormComponent.propDecorators = {
     debug: [{ type: Input }],
     value: [{ type: Input }],
     onChanges: [{ type: Output }],
+    onKeyChanges: [{ type: Output }],
     onSubmit: [{ type: Output }],
     isValid: [{ type: Output }],
     validationErrors: [{ type: Output }],

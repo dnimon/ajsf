@@ -82,6 +82,7 @@ export declare class JsonSchemaFormComponent implements ControlValueAccessor, On
     get value(): any;
     set value(value: any);
     onChanges: EventEmitter<any>;
+    onKeyChanges: EventEmitter<any>;
     onSubmit: EventEmitter<any>;
     isValid: EventEmitter<boolean>;
     validationErrors: EventEmitter<any>;

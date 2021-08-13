@@ -7104,6 +7104,7 @@
             this.dataChanges = new rxjs.Subject(); // Form data observable
             this.isValidChanges = new rxjs.Subject(); // isValid observable
             this.validationErrorChanges = new rxjs.Subject(); // validationErrors observable
+            this.keyChanges = new i0.EventEmitter();
             this.arrayMap = new Map(); // Maps arrays in data object and number of tuple values
             this.dataMap = new Map(); // Maps paths in form data to schema and formGroup paths
             this.dataRecursiveRefMap = new Map(); // Maps recursive reference points in form data
@@ -7592,6 +7593,9 @@
                                         addSpaces(errorKey) + ' Error: ' + formatError(errors[errorKey]);
             })
                 .join('<br>'));
+        };
+        JsonSchemaFormService.prototype.updateKeydown = function (data) {
+            this.keyChanges.emit(data);
         };
         JsonSchemaFormService.prototype.updateValue = function (ctx, value) {
             var e_2, _a;
@@ -8990,6 +8994,7 @@
             };
             // Outputs
             this.onChanges = new i0.EventEmitter(); // Live unvalidated internal form data
+            this.onKeyChanges = new i0.EventEmitter();
             this.onSubmit = new i0.EventEmitter(); // Complete validated form data
             this.isValid = new i0.EventEmitter(); // Is current data valid?
             this.validationErrors = new i0.EventEmitter(); // Validation errors (if any)
@@ -9581,6 +9586,9 @@
                         _this[_this.formValuesInput + "Change"].emit(_this.objectWrap ? data['1'] : data);
                     }
                 }));
+                this.subscriptions.add(this.jsf.keyChanges.subscribe(function (data) {
+                    _this.onKeyChanges.emit(data);
+                }));
                 // Trigger change detection on statusChanges to show updated errors
                 this.subscriptions.add(this.jsf.formGroup.statusChanges.subscribe(function () { return _this.changeDetector.markForCheck(); }));
                 this.subscriptions.add(this.jsf.isValidChanges.subscribe(function (isValid) { return _this.isValid.emit(isValid); }));
@@ -9639,6 +9647,7 @@
         debug: [{ type: i0.Input }],
         value: [{ type: i0.Input }],
         onChanges: [{ type: i0.Output }],
+        onKeyChanges: [{ type: i0.Output }],
         onSubmit: [{ type: i0.Output }],
         isValid: [{ type: i0.Output }],
         validationErrors: [{ type: i0.Output }],

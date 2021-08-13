@@ -1,3 +1,4 @@
+import { EventEmitter } from '@angular/core';
 import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 export interface TitleMapItem {
@@ -38,6 +39,7 @@ export declare class JsonSchemaFormService {
     dataChanges: Subject<any>;
     isValidChanges: Subject<any>;
     validationErrorChanges: Subject<any>;
+    keyChanges: EventEmitter<any>;
     arrayMap: Map<string, number>;
     dataMap: Map<string, any>;
     dataRecursiveRefMap: Map<string, string>;
@@ -92,6 +94,7 @@ export declare class JsonSchemaFormService {
     evaluateCondition(layoutNode: any, dataIndex: number[]): boolean;
     initializeControl(ctx: any, bind?: boolean): boolean;
     formatErrors(errors: any, validationMessages?: any): string;
+    updateKeydown(data: any): void;
     updateValue(ctx: any, value: any): void;
     updateArrayCheckboxList(ctx: any, checkboxList: TitleMapItem[]): void;
     getFormControl(ctx: any): AbstractControl;
