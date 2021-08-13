@@ -126,6 +126,7 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
 
   // Outputs
   @Output() onChanges = new EventEmitter<any>(); // Live unvalidated internal form data
+  @Output() onKeyChanges = new EventEmitter<any>();
   @Output() onSubmit = new EventEmitter<any>(); // Complete validated form data
   @Output() isValid = new EventEmitter<boolean>(); // Is current data valid?
   @Output() validationErrors = new EventEmitter<any>(); // Validation errors (if any)
@@ -726,6 +727,10 @@ export class JsonSchemaFormComponent implements ControlValueAccessor, OnChanges,
         if (this.formValuesInput && this.formValuesInput.indexOf('.') === -1) {
           this[`${this.formValuesInput}Change`].emit(this.objectWrap ? data['1'] : data);
         }
+      }));
+
+      this.subscriptions.add(this.jsf.keyChanges.subscribe(data => {
+        this.onKeyChanges.emit(data);
       }));
 
       // Trigger change detection on statusChanges to show updated errors

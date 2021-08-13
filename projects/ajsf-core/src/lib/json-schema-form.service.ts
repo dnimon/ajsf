@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import cloneDeep from 'lodash/cloneDeep';
@@ -85,6 +85,7 @@ export class JsonSchemaFormService {
   dataChanges: Subject<any> = new Subject(); // Form data observable
   isValidChanges: Subject<any> = new Subject(); // isValid observable
   validationErrorChanges: Subject<any> = new Subject(); // validationErrors observable
+  keyChanges = new EventEmitter<any>();
 
   arrayMap: Map<string, number> = new Map(); // Maps arrays in data object and number of tuple values
   dataMap: Map<string, any> = new Map(); // Maps paths in form data to schema and formGroup paths
@@ -657,6 +658,10 @@ export class JsonSchemaFormService {
         )
         .join('<br>')
     );
+  }
+
+  updateKeydown(data) {
+    this.keyChanges.emit(data);
   }
 
   updateValue(ctx: any, value: any): void {
