@@ -17,4 +17,5 @@ export declare class MaterialInputComponent implements OnInit {
     constructor(matFormFieldDefaultOptions: any, jsf: JsonSchemaFormService);
     ngOnInit(): void;
     updateValue(event: any): void;
+    processKeydown(event: any): void;
 }

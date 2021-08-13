@@ -1012,6 +1012,12 @@ class MaterialInputComponent {
     updateValue(event) {
         this.jsf.updateValue(this, event.target.value);
     }
+    processKeydown(event) {
+        this.jsf.updateKeydown({
+            controlName: this.controlName,
+            event
+        });
+    }
 }
 MaterialInputComponent.decorators = [
     { type: Component, args: [{
@@ -1041,7 +1047,8 @@ MaterialInputComponent.decorators = [
         [style.width]="'100%'"
         [type]="layoutNode?.type"
         [tabindex]="options?.tabindex ? options?.tabindex : 0"
-        (blur)="options.showErrors = true">
+        (blur)="options.showErrors = true"
+        (keydown)="processKeydown($event)">
       <input matInput *ngIf="!boundControl"
         [attr.aria-describedby]="'control' + layoutNode?._id + 'Status'"
         [attr.list]="'control' + layoutNode?._id + 'Autocomplete'"
@@ -1059,7 +1066,7 @@ MaterialInputComponent.decorators = [
         [value]="controlValue"
         [tabindex]="options?.tabindex ? options?.tabindex : 0"
         (input)="updateValue($event)"
-        (blur)="options.showErrors = true">
+        (blur)="options.showErrors = true" (keydown)="processKeydown($event)">
       <span matSuffix *ngIf="options?.suffix || options?.fieldAddonRight"
         [innerHTML]="options?.suffix || options?.fieldAddonRight"></span>
       <mat-hint *ngIf="options?.description && (!options?.showErrors || !options?.errorMessage)"
