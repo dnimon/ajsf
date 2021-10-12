@@ -1,5 +1,5 @@
 import { AbstractControl } from '@angular/forms';
-import {Component, Inject, Input, OnInit, Optional} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, Input, OnInit, Optional} from '@angular/core';
 import { JsonSchemaFormService } from '@ajsf/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
@@ -78,15 +78,22 @@ export class MaterialInputComponent implements OnInit {
   @Input() layoutNode: any;
   @Input() layoutIndex: number[];
   @Input() dataIndex: number[];
+  @Input() parent;
 
 
   constructor(
     @Inject(MAT_FORM_FIELD_DEFAULT_OPTIONS) @Optional() public matFormFieldDefaultOptions,
-    private jsf: JsonSchemaFormService
+    private jsf: JsonSchemaFormService,
+    public cdf: ChangeDetectorRef
   ) {
   }
 
   ngOnInit() {
+    if(this.parent) {
+      this.parent.selectFrameworkWidgets.push(this);
+    } else {
+      console.warn('Missing parent for', this);
+    }
     this.options = this.layoutNode.options || {};
     this.jsf.initializeControl(this);
     if (!this.options.notitle && !this.options.description && this.options.placeholder) {

@@ -65,10 +65,8 @@ export class MaterialFileComponent implements OnInit {
   }
 
   async updateValue(event) {
-    console.log("!!!", event.target.files)
     if(event.target && event.target.files && event.target.files.length) {
       const base64String = await toBase64(event.target.files[0]);
-      console.log(base64String)
       this.formControl.setValue(base64String);
     }
     else {

@@ -16,6 +16,7 @@ import { JsonSchemaFormService } from '@ajsf/core';
         (click)="toggleExpanded()"></label>
       <flex-layout-root-widget *ngIf="expanded"
         [layout]="layoutNode.items"
+        [parent]="parent"
         [dataIndex]="dataIndex"
         [layoutIndex]="layoutIndex"
         [isFlexItem]="getFlexAttribute('is-flex')"
@@ -46,6 +47,7 @@ import { JsonSchemaFormService } from '@ajsf/core';
         (click)="toggleExpanded()"></legend>
       <flex-layout-root-widget *ngIf="expanded"
         [layout]="layoutNode.items"
+        [parent]="parent"
         [dataIndex]="dataIndex"
         [layoutIndex]="layoutIndex"
         [isFlexItem]="getFlexAttribute('is-flex')"
@@ -79,6 +81,7 @@ import { JsonSchemaFormService } from '@ajsf/core';
         <fieldset [disabled]="options?.readonly">
           <flex-layout-root-widget *ngIf="expanded"
             [layout]="layoutNode.items"
+            [parent]="parent"
             [dataIndex]="dataIndex"
             [layoutIndex]="layoutIndex"
             [isFlexItem]="getFlexAttribute('is-flex')"
@@ -118,6 +121,7 @@ import { JsonSchemaFormService } from '@ajsf/core';
           [layout]="layoutNode.items"
           [dataIndex]="dataIndex"
           [layoutIndex]="layoutIndex"
+          [parent]="parent"
           [isFlexItem]="getFlexAttribute('is-flex')"
           [class.form-flex-column]="getFlexAttribute('flex-direction') === 'column'"
           [class.form-flex-row]="getFlexAttribute('flex-direction') === 'row'"
@@ -154,6 +158,7 @@ export class FlexLayoutSectionComponent implements OnInit {
   @Input() layoutNode: any;
   @Input() layoutIndex: number[];
   @Input() dataIndex: number[];
+  @Input() parent;
 
   constructor(
     private jsf: JsonSchemaFormService
