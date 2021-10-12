@@ -14,6 +14,7 @@ export declare class FlexLayoutSectionComponent implements OnInit {
     layoutNode: any;
     layoutIndex: number[];
     dataIndex: number[];
+    parent: any;
     constructor(jsf: JsonSchemaFormService);
     get sectionTitle(): string;
     ngOnInit(): void;

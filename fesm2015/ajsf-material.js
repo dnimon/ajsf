@@ -172,6 +172,7 @@ FlexLayoutSectionComponent.decorators = [
         (click)="toggleExpanded()"></label>
       <flex-layout-root-widget *ngIf="expanded"
         [layout]="layoutNode.items"
+        [parent]="parent"
         [dataIndex]="dataIndex"
         [layoutIndex]="layoutIndex"
         [isFlexItem]="getFlexAttribute('is-flex')"
@@ -202,6 +203,7 @@ FlexLayoutSectionComponent.decorators = [
         (click)="toggleExpanded()"></legend>
       <flex-layout-root-widget *ngIf="expanded"
         [layout]="layoutNode.items"
+        [parent]="parent"
         [dataIndex]="dataIndex"
         [layoutIndex]="layoutIndex"
         [isFlexItem]="getFlexAttribute('is-flex')"
@@ -235,6 +237,7 @@ FlexLayoutSectionComponent.decorators = [
         <fieldset [disabled]="options?.readonly">
           <flex-layout-root-widget *ngIf="expanded"
             [layout]="layoutNode.items"
+            [parent]="parent"
             [dataIndex]="dataIndex"
             [layoutIndex]="layoutIndex"
             [isFlexItem]="getFlexAttribute('is-flex')"
@@ -274,6 +277,7 @@ FlexLayoutSectionComponent.decorators = [
           [layout]="layoutNode.items"
           [dataIndex]="dataIndex"
           [layoutIndex]="layoutIndex"
+          [parent]="parent"
           [isFlexItem]="getFlexAttribute('is-flex')"
           [class.form-flex-column]="getFlexAttribute('flex-direction') === 'column'"
           [class.form-flex-row]="getFlexAttribute('flex-direction') === 'row'"
@@ -305,7 +309,8 @@ FlexLayoutSectionComponent.ctorParameters = () => [
 FlexLayoutSectionComponent.propDecorators = {
     layoutNode: [{ type: Input }],
     layoutIndex: [{ type: Input }],
-    dataIndex: [{ type: Input }]
+    dataIndex: [{ type: Input }],
+    parent: [{ type: Input }]
 };
 
 class MaterialAddReferenceComponent {
@@ -938,10 +943,8 @@ class MaterialFileComponent {
     }
     updateValue(event) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("!!!", event.target.files);
             if (event.target && event.target.files && event.target.files.length) {
                 const base64String = yield toBase64(event.target.files[0]);
-                console.log(base64String);
                 this.formControl.setValue(base64String);
             }
             else {
@@ -995,14 +998,21 @@ MaterialFileComponent.propDecorators = {
 };
 
 class MaterialInputComponent {
-    constructor(matFormFieldDefaultOptions, jsf) {
+    constructor(matFormFieldDefaultOptions, jsf, cdf) {
         this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
         this.jsf = jsf;
+        this.cdf = cdf;
         this.controlDisabled = false;
         this.boundControl = false;
         this.autoCompleteList = [];
     }
     ngOnInit() {
+        if (this.parent) {
+            this.parent.selectFrameworkWidgets.push(this);
+        }
+        else {
+            console.warn('Missing parent for', this);
+        }
         this.options = this.layoutNode.options || {};
         this.jsf.initializeControl(this);
         if (!this.options.notitle && !this.options.description && this.options.placeholder) {
@@ -1087,18 +1097,21 @@ MaterialInputComponent.decorators = [
 ];
 MaterialInputComponent.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: Optional }] },
-    { type: JsonSchemaFormService }
+    { type: JsonSchemaFormService },
+    { type: ChangeDetectorRef }
 ];
 MaterialInputComponent.propDecorators = {
     layoutNode: [{ type: Input }],
     layoutIndex: [{ type: Input }],
-    dataIndex: [{ type: Input }]
+    dataIndex: [{ type: Input }],
+    parent: [{ type: Input }]
 };
 
 class MaterialNumberComponent {
-    constructor(matFormFieldDefaultOptions, jsf) {
+    constructor(matFormFieldDefaultOptions, jsf, cdf) {
         this.matFormFieldDefaultOptions = matFormFieldDefaultOptions;
         this.jsf = jsf;
+        this.cdf = cdf;
         this.controlDisabled = false;
         this.boundControl = false;
         this.allowNegative = true;
@@ -1107,6 +1120,12 @@ class MaterialNumberComponent {
         this.lastValidNumber = '';
     }
     ngOnInit() {
+        if (this.parent) {
+            this.parent.selectFrameworkWidgets.push(this);
+        }
+        else {
+            console.warn('Missing parent for', this);
+        }
         this.options = this.layoutNode.options || {};
         this.jsf.initializeControl(this);
         if (this.layoutNode.dataType === 'integer') {
@@ -1181,12 +1200,14 @@ MaterialNumberComponent.decorators = [
 ];
 MaterialNumberComponent.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [MAT_FORM_FIELD_DEFAULT_OPTIONS,] }, { type: Optional }] },
-    { type: JsonSchemaFormService }
+    { type: JsonSchemaFormService },
+    { type: ChangeDetectorRef }
 ];
 MaterialNumberComponent.propDecorators = {
     layoutNode: [{ type: Input }],
     layoutIndex: [{ type: Input }],
-    dataIndex: [{ type: Input }]
+    dataIndex: [{ type: Input }],
+    parent: [{ type: Input }]
 };
 
 // TODO: Add this control

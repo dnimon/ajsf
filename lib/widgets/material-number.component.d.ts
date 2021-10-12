@@ -1,9 +1,10 @@
-import { OnInit } from '@angular/core';
+import { ChangeDetectorRef, OnInit } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { JsonSchemaFormService } from '@ajsf/core';
 export declare class MaterialNumberComponent implements OnInit {
     matFormFieldDefaultOptions: any;
     private jsf;
+    cdf: ChangeDetectorRef;
     formControl: AbstractControl;
     controlName: string;
     controlValue: any;
@@ -17,7 +18,8 @@ export declare class MaterialNumberComponent implements OnInit {
     layoutNode: any;
     layoutIndex: number[];
     dataIndex: number[];
-    constructor(matFormFieldDefaultOptions: any, jsf: JsonSchemaFormService);
+    parent: any;
+    constructor(matFormFieldDefaultOptions: any, jsf: JsonSchemaFormService, cdf: ChangeDetectorRef);
     ngOnInit(): void;
     updateValue(event: any): void;
 }
